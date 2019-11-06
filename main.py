@@ -3,8 +3,10 @@
 import pygame
 import time
 import random
+from spritesheet_functions import SpriteSheet
  
 pygame.init()
+all_sprites = pygame.sprite.Group()
 
 #%% set params
 
@@ -40,10 +42,11 @@ bar_border = 3
 
 radius = 40
 icon_border = 3
+icon_shift = bar_width/2
 
-hicfx,hicfy,hicx,hicy = int(display_width*1/7),int(display_height*5/6),int(display_width*1/7+icon_border),int(display_height*5/6)
-eicfx,eicfy,eicx,eicy = int(display_width*3/7),int(display_height*5/6),int(display_width*3/7+icon_border),int(display_height*5/6)
-micfx,micfy,micx,micy = int(display_width*5/7),int(display_height*5/6),int(display_width*5/7+icon_border),int(display_height*5/6)
+hicfx,hicfy,hicx,hicy = int(display_width*1/7+icon_shift),int(display_height*5/6),int(display_width*1/7+icon_shift),int(display_height*5/6) # health icon position
+eicfx,eicfy,eicx,eicy = int(display_width*3/7+icon_shift),int(display_height*5/6),int(display_width*3/7+icon_shift),int(display_height*5/6) # energy icon position
+micfx,micfy,micx,micy = int(display_width*5/7+icon_shift),int(display_height*5/6),int(display_width*5/7+icon_shift),int(display_height*5/6) # mood icon position
 
 hbfx,hbfy,hbfw,hbfh=display_width*1/7,display_height/6,bar_width,bar_height # health bar frame positions
 ebfx,ebfy,ebfw,ebfh=display_width*3/7,display_height/6,bar_width,bar_height # energy bar frame positions
@@ -56,11 +59,72 @@ mood_flash_count = 3
 gameDisplay = pygame.display.set_mode((display_width,display_height))
 pygame.display.set_caption('Art Game!')
 clock = pygame.time.Clock()
- 
-#carImg = pygame.image.load('racecar.png')
-
 starting_death_count = 100
 
+sprite_sheet = SpriteSheet("p1_walk.png")
+neutral = sprite_sheet.get_image(0, 0, 66, 90)
+low_health = sprite_sheet.get_image(0, 0, 66, 90)
+low_energy = sprite_sheet.get_image(66, 0, 66, 90)
+low_mood = sprite_sheet.get_image(132, 0, 67, 90)
+high_health = sprite_sheet.get_image(0, 93, 66, 90)
+high_energy = sprite_sheet.get_image(66, 93, 66, 90)
+high_mood = sprite_sheet.get_image(132, 93, 72, 90)
+dead = sprite_sheet.get_image(0, 186, 70, 90)
+
+char_width = 66
+char_height = 90
+
+#import spritesheet
+#
+#ss = spritesheet.spritesheet('p1_walk.png')
+## Sprite is 16x16 pixels at location 0,0 in the file...
+#image = ss.image_at((0, 0, 16, 16))
+#images = []
+## Load two images into an array, their transparent bit is (255, 255, 255)
+#images = ss.images_at((0, 0, 16, 16),(17, 0, 16,16), colorkey=(255, 255, 255))
+
+#%% sprites
+
+class Health_Sprite(pygame.sprite.Sprite):
+    def __init__(self):
+        super(Health_Sprite, self).__init__()
+        self.image = high_health
+        self.image.set_colorkey((255, 255, 255))
+        self.rect = self.image.get_rect()
+
+class Energy_Sprite(pygame.sprite.Sprite):
+    def __init__(self):
+        super(Energy_Sprite, self).__init__()
+        self.image = high_energy
+        self.image.set_colorkey((255, 255, 255))
+        self.rect = self.image.get_rect()
+
+class Mood_Sprite(pygame.sprite.Sprite):
+    def __init__(self):
+        super(Mood_Sprite, self).__init__()
+        self.image = high_mood
+        self.image.set_colorkey((255, 255, 255))
+        self.rect = self.image.get_rect()
+
+
+#%% Player
+class PlayerSprite(pygame.sprite.Sprite):
+    image = None
+
+    def __init__(self, location):
+        pygame.sprite.Sprite.__init__(self)
+
+        if PlayerSprite.image is None:
+            # This is the first time this class has been
+            # instantiated. So, load the image for this and
+            # all subsequence instances.
+            PlayerSprite.image = pygame.image.load("p1_walk.png").convert()
+        self.image = pygame.Surface([66,90]).convert()
+        self.image.blit(PlayerSprite.image, (0, 0), (0, 0, char_width,char_height))
+        self.image.set_colorkey(black)
+        self.rect = self.image.get_rect()
+        self.rect.topleft = location
+        
 #%% Bars    
 def health_bar(b1x,b1y,b1w,b1h, color):
     pygame.draw.rect(gameDisplay,frame_color, [hbfx,hbfy,hbfw,hbfh])
@@ -142,9 +206,6 @@ def button(msg,x,y,w,h,ic,ac,action=None):
     textRect.center = ( (x+(w/2)), (y+(h/2)) )
     gameDisplay.blit(textSurf, textRect)
     
-def crash():
-    message_display('You Crashed')
-
 def game_intro():
 
     intro = True
@@ -225,9 +286,17 @@ def game_loop():
     life_count = 0
     death_rate_mod = 0.01
     death_num = 0
+    dead_count = 0
     
     gameExit = False
- 
+    
+    p = PlayerSprite([display_width/2-char_width/2,display_height/2-char_height/2])
+
+#    player = Player()
+#    health_sprite = Health_Sprite()
+#    energy_sprite = Energy_Sprite()
+#    mood_sprite = Mood_Sprite()
+
     while not gameExit:
  
         for event in pygame.event.get():
@@ -239,7 +308,7 @@ def game_loop():
                 if event.key == pygame.K_LEFT:
                     health_color = health_color_bright
                     color_change_count = 20
-                    health_width = health_width + 20#                    
+                    health_width = health_width + 20                    
                 if event.key == pygame.K_DOWN:
                     energy_color = energy_color_bright
                     color_change_count = 20
@@ -248,7 +317,7 @@ def game_loop():
                     mood_color = mood_color_bright
                     color_change_count = 20
                     mood_width += 20  
-                    #                if event.key == pygame.K_UP:
+                    #add in excape and q keydowns as quit()
                     
             if event.type == pygame.KEYUP:
                 if event.key == pygame.K_LEFT or event.key == pygame.K_RIGHT or event.key == pygame.K_UP or event.key == pygame.K_DOWN:
@@ -256,7 +325,7 @@ def game_loop():
 
         if player == "alive":
             gameDisplay.fill(white)
-                        
+                   
             smallText = pygame.font.Font("freesansbold.ttf",20)
             textSurf, textRect = text_objects("Death Count:" + str(death_num),smallText)
             textRect.center = (100,50)
@@ -282,6 +351,24 @@ def game_loop():
             energy_bar(energy_startx, energy_starty, energy_width, energy_height, energy_color)
             mood_bar(mood_startx, mood_starty, mood_width, mood_height, mood_color)                        
             
+            gameDisplay.blit(p.image, p.rect)
+            # add a bunch of different sprites to a long list and then just call the index of the list when wanting different animations
+            
+            
+#            gameDisplay.blit(player.surf, (display_width/2,display_height/2))
+            
+#            all_sprites.add(player)
+#            all_sprites.add(health_sprite)
+#            all_sprites.add(energy_sprite)
+#            all_sprites.add(mood_sprite)
+#
+#            for entity in all_sprites:
+#                gameDisplay.blit(entity.image, entity.rect)
+#            
+#            all_sprites_list.draw(screen)
+            
+#            gameDisplay.blit(player.surf, player.rect)
+            
             if 0 < health_width < bar_width - bar_border*2 + 30 and 0 < energy_width < bar_width - bar_border*2 + 30 and 0 < mood_width < bar_width - bar_border*2 + 30:
                 if frame_count % 10 == 0:
                     health_width -= health_loss + death_rate_mod*life_count
@@ -289,7 +376,6 @@ def game_loop():
                     mood_width -= mood_loss + death_rate_mod*life_count
                     life_count += 1
                     
-
             else:
                 if health_width <= 0:
                     death_cause = "starvation!"
