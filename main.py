@@ -62,6 +62,8 @@ clock = pygame.time.Clock()
 starting_death_count = 100
 
 sprite_sheet = SpriteSheet("p1_walk.png")
+
+sprite_sheet1 = SpriteSheet("IdleMe.png")
 neutral = sprite_sheet.get_image(0, 0, 66, 90)
 low_health = sprite_sheet.get_image(0, 0, 66, 90)
 low_energy = sprite_sheet.get_image(66, 0, 66, 90)
@@ -73,6 +75,10 @@ dead = sprite_sheet.get_image(0, 186, 70, 90)
 
 char_width = 66
 char_height = 90
+
+Mad_Size = 1450,1800
+Mad_Resize = 10
+mad_buff = 0
 
 #import spritesheet
 #
@@ -125,6 +131,115 @@ class PlayerSprite(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
         self.rect.topleft = location
         
+class MadSprite(pygame.sprite.Sprite):
+    image = None
+            
+    def __init__(self, pos):
+        pygame.sprite.Sprite.__init__(self)
+        
+        self.mad_frames = []
+
+        sprite_sheet = SpriteSheet("MadMe.png")
+        
+        image = pygame.transform.scale(sprite_sheet.get_image(0, 0, Mad_Size[0]+mad_buff, Mad_Size[1]),(int(Mad_Size[0]/Mad_Resize), int(Mad_Size[1]/Mad_Resize)))
+        image.set_colorkey(black)
+        self.mad_frames.append(image)
+        image = pygame.transform.scale(sprite_sheet.get_image(Mad_Size[0], 0, Mad_Size[0]+mad_buff, Mad_Size[1]),(int(Mad_Size[0]/Mad_Resize), int(Mad_Size[1]/Mad_Resize)))
+        image.set_colorkey(black)
+        self.mad_frames.append(image)
+        image = pygame.transform.scale(sprite_sheet.get_image(Mad_Size[0]*2, 0, Mad_Size[0]+mad_buff, Mad_Size[1]),(int(Mad_Size[0]/Mad_Resize), int(Mad_Size[1]/Mad_Resize)))
+        image.set_colorkey(black)
+        self.mad_frames.append(image)
+        image = pygame.transform.scale(sprite_sheet.get_image(0, Mad_Size[1], Mad_Size[0]+mad_buff, Mad_Size[1]),(int(Mad_Size[0]/Mad_Resize), int(Mad_Size[1]/Mad_Resize)))
+        image.set_colorkey(black)
+        self.mad_frames.append(image)
+        image = pygame.transform.scale(sprite_sheet.get_image(Mad_Size[0], Mad_Size[1], Mad_Size[0]+mad_buff, Mad_Size[1]),(int(Mad_Size[0]/Mad_Resize), int(Mad_Size[1]/Mad_Resize)))
+        image.set_colorkey(black)
+        self.mad_frames.append(image)
+        image = pygame.transform.scale(sprite_sheet.get_image(Mad_Size[0]*2, Mad_Size[1]+mad_buff, Mad_Size[0]+mad_buff, Mad_Size[1]),(int(Mad_Size[0]/Mad_Resize), int(Mad_Size[1]/Mad_Resize)))
+        image.set_colorkey(black)
+        self.mad_frames.append(image)
+        image = pygame.transform.scale(sprite_sheet.get_image(0, Mad_Size[1]*2, Mad_Size[0]+mad_buff, Mad_Size[1]),(int(Mad_Size[0]/Mad_Resize), int(Mad_Size[1]/Mad_Resize)))
+        image.set_colorkey(black)
+        self.mad_frames.append(image)
+        image = pygame.transform.scale(sprite_sheet.get_image(Mad_Size[0], Mad_Size[1]*2, Mad_Size[0]+mad_buff, Mad_Size[1]),(int(Mad_Size[0]/Mad_Resize), int(Mad_Size[1]/Mad_Resize)))
+        image.set_colorkey(black)
+        self.mad_frames.append(image)
+
+        self.frame = 0
+
+        # starting image
+        self.image = self.mad_frames[self.frame]
+
+        # Set a referance to the image rect.
+#        self.rect = self.image.get_rect()
+        self.rect = self.image.get_rect()
+
+        self.rect.center = pos
+#        self._spritex = pos[0]
+#        self._spritey = pos[1]
+                
+    def update(self):
+        self.frame += 1
+        if self.frame + 1 > len(self.mad_frames):
+            self.frame = 0
+        self.image = self.mad_frames[self.frame]
+        
+        
+class IdleSprite(pygame.sprite.Sprite):
+    image = None
+            
+    def __init__(self, pos):
+        pygame.sprite.Sprite.__init__(self)
+        
+        self.mad_frames = []
+
+        sprite_sheet = SpriteSheet("IdleMe.png")
+        
+        image = pygame.transform.scale(sprite_sheet.get_image(0, 0, Mad_Size[0]+mad_buff, Mad_Size[1]),(int(Mad_Size[0]/Mad_Resize), int(Mad_Size[1]/Mad_Resize)))
+        image.set_colorkey(black)
+        self.mad_frames.append(image)
+        image = pygame.transform.scale(sprite_sheet.get_image(Mad_Size[0], 0, Mad_Size[0]+mad_buff, Mad_Size[1]),(int(Mad_Size[0]/Mad_Resize), int(Mad_Size[1]/Mad_Resize)))
+        image.set_colorkey(black)
+        self.mad_frames.append(image)
+        image = pygame.transform.scale(sprite_sheet.get_image(Mad_Size[0]*2, 0, Mad_Size[0]+mad_buff, Mad_Size[1]),(int(Mad_Size[0]/Mad_Resize), int(Mad_Size[1]/Mad_Resize)))
+        image.set_colorkey(black)
+        self.mad_frames.append(image)
+        image = pygame.transform.scale(sprite_sheet.get_image(0, Mad_Size[1], Mad_Size[0]+mad_buff, Mad_Size[1]),(int(Mad_Size[0]/Mad_Resize), int(Mad_Size[1]/Mad_Resize)))
+        image.set_colorkey(black)
+        self.mad_frames.append(image)
+        image = pygame.transform.scale(sprite_sheet.get_image(Mad_Size[0], Mad_Size[1], Mad_Size[0]+mad_buff, Mad_Size[1]),(int(Mad_Size[0]/Mad_Resize), int(Mad_Size[1]/Mad_Resize)))
+        image.set_colorkey(black)
+        self.mad_frames.append(image)
+        image = pygame.transform.scale(sprite_sheet.get_image(Mad_Size[0]*2, Mad_Size[1]+mad_buff, Mad_Size[0]+mad_buff, Mad_Size[1]),(int(Mad_Size[0]/Mad_Resize), int(Mad_Size[1]/Mad_Resize)))
+        image.set_colorkey(black)
+        self.mad_frames.append(image)
+        image = pygame.transform.scale(sprite_sheet.get_image(0, Mad_Size[1]*2, Mad_Size[0]+mad_buff, Mad_Size[1]),(int(Mad_Size[0]/Mad_Resize), int(Mad_Size[1]/Mad_Resize)))
+        image.set_colorkey(black)
+        self.mad_frames.append(image)
+        image = pygame.transform.scale(sprite_sheet.get_image(Mad_Size[0], Mad_Size[1]*2, Mad_Size[0]+mad_buff, Mad_Size[1]),(int(Mad_Size[0]/Mad_Resize), int(Mad_Size[1]/Mad_Resize)))
+        image.set_colorkey(black)
+        self.mad_frames.append(image)
+
+        self.frame = 0
+
+        # starting image
+        self.image = self.mad_frames[self.frame]
+
+        # Set a referance to the image rect.
+#        self.rect = self.image.get_rect()
+        self.rect = self.image.get_rect()
+
+        self.rect.center = pos
+#        self._spritex = pos[0]
+#        self._spritey = pos[1]
+                
+    def update(self):
+        self.frame += 1
+        if self.frame + 1 > len(self.mad_frames):
+            self.frame = 0
+        self.image = self.mad_frames[self.frame]
+
 #%% Bars    
 def health_bar(b1x,b1y,b1w,b1h, color):
     pygame.draw.rect(gameDisplay,frame_color, [hbfx,hbfy,hbfw,hbfh])
@@ -289,9 +404,13 @@ def game_loop():
     dead_count = 0
     
     gameExit = False
-    
+    m = MadSprite([300, 500])
+    i = IdleSprite([100, 300])
     p = PlayerSprite([display_width/2-char_width/2,display_height/2-char_height/2])
-
+    d = MadSprite([400, 100])
+    w = MadSprite([100, 200])
+    active_sprite_list = pygame.sprite.Group()
+    active_sprite_list.add(m)
 #    player = Player()
 #    health_sprite = Health_Sprite()
 #    energy_sprite = Energy_Sprite()
@@ -336,12 +455,14 @@ def game_loop():
             else:
                 health_color, energy_color, mood_color = health_color_reg, energy_color_reg, mood_color_reg
             
+            
             if health_width < 25:
                 health_color = health_color_dark
             if energy_width < 25:
                 energy_color = energy_color_dark
             if mood_width < 25:
                 mood_color = mood_color_dark
+                
             
             health_icon(health_color)
             energy_icon(energy_color)
@@ -351,7 +472,20 @@ def game_loop():
             energy_bar(energy_startx, energy_starty, energy_width, energy_height, energy_color)
             mood_bar(mood_startx, mood_starty, mood_width, mood_height, mood_color)                        
             
+#            if frame_count % 50 == 0:
+#                active_sprite_list.update()
+#                print(m.frame)
+            
             gameDisplay.blit(p.image, p.rect)
+            
+            if frame_count % 7 == 0:
+#            active_sprite_list.draw(gameDisplay)
+                if health_width < 25 or energy_width < 25 or mood_width < 25:
+                    m.draw(gameDisplay)
+                if health_width > bar_width - bar_border*2 or energy_width > bar_width - bar_border*2 or mood_width > bar_width - bar_border*2:
+                    w.draw(gameDisplay)
+                else: 
+                    i.draw(gameDisplay)
             # add a bunch of different sprites to a long list and then just call the index of the list when wanting different animations
             
             
@@ -393,7 +527,8 @@ def game_loop():
                 dead_count = starting_death_count
                 death_num += 1
                 life_count = 0
-           
+                
+                d.draw(gameDisplay)
         else:
             if dead_count <= 0:
                 player = "alive"
