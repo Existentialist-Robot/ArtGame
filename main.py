@@ -222,17 +222,11 @@ class IdleSprite(pygame.sprite.Sprite):
         self.mad_frames.append(image)
 
         self.frame = 0
-
         # starting image
         self.image = self.mad_frames[self.frame]
-
-        # Set a referance to the image rect.
-#        self.rect = self.image.get_rect()
         self.rect = self.image.get_rect()
-
         self.rect.center = pos
-#        self._spritex = pos[0]
-#        self._spritey = pos[1]
+
                 
     def update(self):
         self.frame += 1
@@ -407,7 +401,7 @@ def game_loop():
     m = MadSprite([300, 500])
     i = IdleSprite([100, 300])
     p = PlayerSprite([display_width/2-char_width/2,display_height/2-char_height/2])
-    d = MadSprite([400, 100])
+#    d = DeadSprite([400, 100])
     w = MadSprite([100, 200])
     active_sprite_list = pygame.sprite.Group()
     active_sprite_list.add(m)

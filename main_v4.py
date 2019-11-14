@@ -57,7 +57,6 @@ mood_flash_count = 3
 gameDisplay = pygame.display.set_mode((display_width,display_height))
 pygame.display.set_caption('Art Game!')
 clock = pygame.time.Clock()
-starting_death_count = 100
 
 #sprite_sheet = SpriteSheet("p1_walk.png")
 #neutral = sprite_sheet.get_image(0, 0, 66, 90)
@@ -69,14 +68,31 @@ starting_death_count = 100
 #high_mood = sprite_sheet.get_image(132, 93, 72, 90)
 #dead = sprite_sheet.get_image(0, 186, 70, 90)
 
+### not implemented yet
+#Idle_Size = 1450,1800
+#Idle_Resize = 10 # transform size is 1/10th of original
+#idle_buff = 0
+
 Mad_Size = 1450,1800
-Mad_Resize = 10
+Mad_Resize = 10 # transform size is 1/10th of original
 mad_buff = 0
+
+Eat_Size = 1500,1800
+Eat_Resize = 10 # transform size is 1/10th of original
+eat_buff = 0
+
+Netflix_Size = 1500,1800
+Netflix_Resize = 10 # transform size is 1/10th of original
+netflix_buff = 0
+
+Dead_Size = 1450,1800
+Dead_Resize = 10 # transform size is 1/10th of original
+dead_buff = 0
 
 char_width = int(Mad_Size[0]/Mad_Resize) #66
 char_height = int(Mad_Size[1]/Mad_Resize) #90
 
-#%% sprites
+#%% Icon sprites
 
 #class Health_Sprite(pygame.sprite.Sprite):
 #    def __init__(self):
@@ -192,6 +208,120 @@ class MadSprite(pygame.sprite.Sprite):
             self.frame = 0
         self.image = self.mad_frames[self.frame]
                 
+class EatSprite(pygame.sprite.Sprite):
+    image = None
+            
+    def __init__(self, pos):
+        pygame.sprite.Sprite.__init__(self)
+        
+        self.Eat_frames = []
+
+        sprite_sheet = SpriteSheet("EatMe.png")
+        
+        image = pygame.transform.scale(sprite_sheet.get_image(0, 0, Eat_Size[0]+eat_buff, Eat_Size[1]),(int(Eat_Size[0]/Eat_Resize), int(Eat_Size[1]/Eat_Resize)))
+        image.set_colorkey(black)
+        self.Eat_frames.append(image)
+        image = pygame.transform.scale(sprite_sheet.get_image(Eat_Size[0], 0, Eat_Size[0]+eat_buff, Eat_Size[1]),(int(Eat_Size[0]/Eat_Resize), int(Eat_Size[1]/Eat_Resize)))
+        image.set_colorkey(black)
+        self.Eat_frames.append(image)
+        image = pygame.transform.scale(sprite_sheet.get_image(Eat_Size[0]*2, 0, Eat_Size[0]+eat_buff, Eat_Size[1]),(int(Eat_Size[0]/Eat_Resize), int(Eat_Size[1]/Eat_Resize)))
+        image.set_colorkey(black)
+        self.Eat_frames.append(image)
+        image = pygame.transform.scale(sprite_sheet.get_image(Eat_Size[0]*3, 0, Eat_Size[0]+eat_buff, Eat_Size[1]),(int(Eat_Size[0]/Eat_Resize), int(Eat_Size[1]/Eat_Resize)))
+        image.set_colorkey(black)
+        self.Eat_frames.append(image)        
+        image = pygame.transform.scale(sprite_sheet.get_image(0, Eat_Size[1], Eat_Size[0]+eat_buff, Eat_Size[1]),(int(Eat_Size[0]/Eat_Resize), int(Eat_Size[1]/Eat_Resize)))
+        image.set_colorkey(black)
+        self.Eat_frames.append(image)
+        image = pygame.transform.scale(sprite_sheet.get_image(Eat_Size[0], Eat_Size[1], Eat_Size[0]+eat_buff, Eat_Size[1]),(int(Eat_Size[0]/Eat_Resize), int(Eat_Size[1]/Eat_Resize)))
+        image.set_colorkey(black)
+        self.Eat_frames.append(image)
+        image = pygame.transform.scale(sprite_sheet.get_image(Eat_Size[0]*2, Eat_Size[1], Eat_Size[0]+eat_buff, Eat_Size[1]),(int(Eat_Size[0]/Eat_Resize), int(Eat_Size[1]/Eat_Resize)))
+        image.set_colorkey(black)
+        self.Eat_frames.append(image)
+        image = pygame.transform.scale(sprite_sheet.get_image(Eat_Size[0]*3, 0, Eat_Size[0]+eat_buff, Eat_Size[1]),(int(Eat_Size[0]/Eat_Resize), int(Eat_Size[1]/Eat_Resize)))
+        image.set_colorkey(black)
+        self.Eat_frames.append(image)
+        image = pygame.transform.scale(sprite_sheet.get_image(0, Eat_Size[1]*2, Eat_Size[0]+eat_buff, Eat_Size[1]),(int(Eat_Size[0]/Eat_Resize), int(Eat_Size[1]/Eat_Resize)))
+        image.set_colorkey(black)
+        self.Eat_frames.append(image)
+        image = pygame.transform.scale(sprite_sheet.get_image(Eat_Size[0], Eat_Size[1]*2, Eat_Size[0]+eat_buff, Eat_Size[1]),(int(Eat_Size[0]/Eat_Resize), int(Eat_Size[1]/Eat_Resize)))
+        image.set_colorkey(black)
+        self.Eat_frames.append(image)
+        image = pygame.transform.scale(sprite_sheet.get_image(Eat_Size[0]*2, Eat_Size[1]*2, Eat_Size[0]+eat_buff, Eat_Size[1]),(int(Eat_Size[0]/Eat_Resize), int(Eat_Size[1]/Eat_Resize)))
+        image.set_colorkey(black)
+        self.Eat_frames.append(image)        
+        image = pygame.transform.scale(sprite_sheet.get_image(Eat_Size[0]*3, Eat_Size[1]*2, Eat_Size[0]+eat_buff, Eat_Size[1]),(int(Eat_Size[0]/Eat_Resize), int(Eat_Size[1]/Eat_Resize)))
+        image.set_colorkey(black)
+        self.Eat_frames.append(image)         
+        image = pygame.transform.scale(sprite_sheet.get_image(0, Eat_Size[1]*3, Eat_Size[0]+eat_buff, Eat_Size[1]),(int(Eat_Size[0]/Eat_Resize), int(Eat_Size[1]/Eat_Resize)))
+        image.set_colorkey(black)
+        self.Eat_frames.append(image)
+        self.frame = 0
+        self.image = self.Eat_frames[self.frame]
+        self.rect = self.image.get_rect()
+        self.rect.center = pos
+        
+    def update(self):
+        self.frame += 1
+        if self.frame + 1 > len(self.Eat_frames):
+            self.frame = 0
+        self.image = self.Eat_frames[self.frame]
+        
+class NetflixSprite(pygame.sprite.Sprite):
+    image = None
+            
+    def __init__(self, pos):
+        pygame.sprite.Sprite.__init__(self)
+        
+        self.Netflix_frames = []
+
+        sprite_sheet = SpriteSheet("NetflixMe.png")
+        
+        image = pygame.transform.scale(sprite_sheet.get_image(0, 0, Netflix_Size[0]+netflix_buff, Netflix_Size[1]),(int(Netflix_Size[0]/Netflix_Resize), int(Netflix_Size[1]/Netflix_Resize)))
+        image.set_colorkey(black)
+        self.Netflix_frames.append(image)
+        image = pygame.transform.scale(sprite_sheet.get_image(Netflix_Size[0], 0, Netflix_Size[0]+netflix_buff, Netflix_Size[1]),(int(Netflix_Size[0]/Netflix_Resize), int(Netflix_Size[1]/Netflix_Resize)))
+        image.set_colorkey(black)
+        self.Netflix_frames.append(image)
+        image = pygame.transform.scale(sprite_sheet.get_image(Netflix_Size[0]*2, 0, Netflix_Size[0]+netflix_buff, Netflix_Size[1]),(int(Netflix_Size[0]/Netflix_Resize), int(Netflix_Size[1]/Netflix_Resize)))
+        image.set_colorkey(black)
+        self.Netflix_frames.append(image)
+        image = pygame.transform.scale(sprite_sheet.get_image(Netflix_Size[0]*3, 0, Netflix_Size[0]+netflix_buff, Netflix_Size[1]),(int(Netflix_Size[0]/Netflix_Resize), int(Netflix_Size[1]/Netflix_Resize)))
+        image.set_colorkey(black)
+        self.Netflix_frames.append(image)        
+        image = pygame.transform.scale(sprite_sheet.get_image(0, Netflix_Size[1], Netflix_Size[0]+netflix_buff, Netflix_Size[1]),(int(Netflix_Size[0]/Netflix_Resize), int(Netflix_Size[1]/Netflix_Resize)))
+        image.set_colorkey(black)
+        self.Netflix_frames.append(image)
+        image = pygame.transform.scale(sprite_sheet.get_image(Netflix_Size[0], Netflix_Size[1], Netflix_Size[0]+netflix_buff, Netflix_Size[1]),(int(Netflix_Size[0]/Netflix_Resize), int(Netflix_Size[1]/Netflix_Resize)))
+        image.set_colorkey(black)
+        self.Netflix_frames.append(image)
+        image = pygame.transform.scale(sprite_sheet.get_image(Netflix_Size[0]*2, Netflix_Size[1], Netflix_Size[0]+netflix_buff, Netflix_Size[1]),(int(Netflix_Size[0]/Netflix_Resize), int(Netflix_Size[1]/Netflix_Resize)))
+        image.set_colorkey(black)
+        self.Netflix_frames.append(image)
+        image = pygame.transform.scale(sprite_sheet.get_image(Netflix_Size[0]*3, Netflix_Size[1], Netflix_Size[0]+netflix_buff, Netflix_Size[1]),(int(Netflix_Size[0]/Netflix_Resize), int(Netflix_Size[1]/Netflix_Resize)))
+        image.set_colorkey(black)
+        self.Netflix_frames.append(image)
+        image = pygame.transform.scale(sprite_sheet.get_image(0, Netflix_Size[1]*2, Netflix_Size[0]+netflix_buff, Netflix_Size[1]),(int(Netflix_Size[0]/Netflix_Resize), int(Netflix_Size[1]/Netflix_Resize)))
+        image.set_colorkey(black)
+        self.Netflix_frames.append(image)
+        image = pygame.transform.scale(sprite_sheet.get_image(Netflix_Size[0], Netflix_Size[1]*2, Netflix_Size[0]+netflix_buff, Netflix_Size[1]),(int(Netflix_Size[0]/Netflix_Resize), int(Netflix_Size[1]/Netflix_Resize)))
+        image.set_colorkey(black)
+        self.Netflix_frames.append(image)
+        image = pygame.transform.scale(sprite_sheet.get_image(Netflix_Size[0]*2, Netflix_Size[1]*2, Netflix_Size[0]+netflix_buff, Netflix_Size[1]),(int(Netflix_Size[0]/Netflix_Resize), int(Netflix_Size[1]/Netflix_Resize)))
+        image.set_colorkey(black)
+        self.Netflix_frames.append(image)                
+
+        self.frame = 0
+        self.image = self.Netflix_frames[self.frame]
+        self.rect = self.image.get_rect()
+        self.rect.center = pos
+        
+    def update(self):
+        self.frame += 1
+        if self.frame + 1 > len(self.Netflix_frames):
+            self.frame = 0
+        self.image = self.Netflix_frames[self.frame]
         
 class DeadSprite(pygame.sprite.Sprite):
     image = None
@@ -201,15 +331,12 @@ class DeadSprite(pygame.sprite.Sprite):
         
         self.mad_frames = []
 
-        sprite_sheet = SpriteSheet("MadMe.png")
+        sprite_sheet = SpriteSheet("DeadMe.png")
         
         image = pygame.transform.scale(sprite_sheet.get_image(0, 0, Mad_Size[0]+mad_buff, Mad_Size[1]),(int(Mad_Size[0]/Mad_Resize), int(Mad_Size[1]/Mad_Resize)))
         image.set_colorkey(black)
         self.mad_frames.append(image)
         image = pygame.transform.scale(sprite_sheet.get_image(Mad_Size[0], 0, Mad_Size[0]+mad_buff, Mad_Size[1]),(int(Mad_Size[0]/Mad_Resize), int(Mad_Size[1]/Mad_Resize)))
-        image.set_colorkey(black)
-        self.mad_frames.append(image)
-        image = pygame.transform.scale(sprite_sheet.get_image(Mad_Size[0]*2, 0, Mad_Size[0]+mad_buff, Mad_Size[1]),(int(Mad_Size[0]/Mad_Resize), int(Mad_Size[1]/Mad_Resize)))
         image.set_colorkey(black)
         self.mad_frames.append(image)
         image = pygame.transform.scale(sprite_sheet.get_image(0, Mad_Size[1], Mad_Size[0]+mad_buff, Mad_Size[1]),(int(Mad_Size[0]/Mad_Resize), int(Mad_Size[1]/Mad_Resize)))
@@ -218,15 +345,7 @@ class DeadSprite(pygame.sprite.Sprite):
         image = pygame.transform.scale(sprite_sheet.get_image(Mad_Size[0], Mad_Size[1], Mad_Size[0]+mad_buff, Mad_Size[1]),(int(Mad_Size[0]/Mad_Resize), int(Mad_Size[1]/Mad_Resize)))
         image.set_colorkey(black)
         self.mad_frames.append(image)
-        image = pygame.transform.scale(sprite_sheet.get_image(Mad_Size[0]*2, Mad_Size[1]+mad_buff, Mad_Size[0]+mad_buff, Mad_Size[1]),(int(Mad_Size[0]/Mad_Resize), int(Mad_Size[1]/Mad_Resize)))
-        image.set_colorkey(black)
-        self.mad_frames.append(image)
-        image = pygame.transform.scale(sprite_sheet.get_image(0, Mad_Size[1]*2, Mad_Size[0]+mad_buff, Mad_Size[1]),(int(Mad_Size[0]/Mad_Resize), int(Mad_Size[1]/Mad_Resize)))
-        image.set_colorkey(black)
-        self.mad_frames.append(image)
-        image = pygame.transform.scale(sprite_sheet.get_image(Mad_Size[0], Mad_Size[1]*2, Mad_Size[0]+mad_buff, Mad_Size[1]),(int(Mad_Size[0]/Mad_Resize), int(Mad_Size[1]/Mad_Resize)))
-        image.set_colorkey(black)
-        self.mad_frames.append(image)
+
 
         self.frame = 0
         self.image = self.mad_frames[self.frame]
@@ -396,76 +515,127 @@ def game_loop():
     death_rate_mod = 0.01
     death_num = 0
     dead_count = 0
+    starting_death_count = 200
     
     gameExit = False
-    m = MadSprite([display_width/2,display_height/2])
     i = IdleSprite([display_width/2,display_height/2])
+    m = MadSprite([display_width/2,display_height/2])
+    e = EatSprite([display_width/2,display_height/2])
+    n = NetflixSprite([display_width/2,display_height/2])
     d = DeadSprite([display_width/2,display_height/2])
+    
     idle_sprite_list = pygame.sprite.Group()
     idle_sprite_list.add(i)
     mad_sprite_list = pygame.sprite.Group()
     mad_sprite_list.add(m)
     elated_sprite_list = pygame.sprite.Group()
     elated_sprite_list.add(m)
+    eat_sprite_list = pygame.sprite.Group()
+    eat_sprite_list.add(e) 
+    netflix_sprite_list = pygame.sprite.Group()
+    netflix_sprite_list.add(n)
     dead_sprite_list = pygame.sprite.Group()
     dead_sprite_list.add(d)    
 
+    icon_used = "None"
+    icon_time_down = 0
+
     while not gameExit:
  
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                pygame.quit()
-                quit()
-                
-            if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_LEFT:
-                    health_color = health_color_bright
-                    color_change_count = 20
-                    health_width = health_width + 20                    
-                if event.key == pygame.K_DOWN:
-                    energy_color = energy_color_bright
-                    color_change_count = 20
-                    energy_width += 20
-                if event.key == pygame.K_RIGHT:
-                    mood_color = mood_color_bright
-                    color_change_count = 20
-                    mood_width += 20  
-                    #add in excape and q keydowns as quit()
-                    
-            if event.type == pygame.KEYUP:
-                if event.key == pygame.K_LEFT or event.key == pygame.K_RIGHT or event.key == pygame.K_UP or event.key == pygame.K_DOWN:
-                    pass
-
-        
         gameDisplay.fill(white)
-               
         smallText = pygame.font.Font("freesansbold.ttf",20)
         textSurf, textRect = text_objects("Death Count:" + str(death_num),smallText)
         textRect.center = (100,50)
         gameDisplay.blit(textSurf, textRect)
         
-        if color_change_count > 0:
-            color_change_count -= 1
-        else:
-            health_color, energy_color, mood_color = health_color_reg, energy_color_reg, mood_color_reg
-        
-        if health_width < 25:
-            health_color = health_color_dark
-        if energy_width < 25:
-            energy_color = energy_color_dark
-        if mood_width < 25:
-            mood_color = mood_color_dark
-            
-        health_icon(health_color)
-        energy_icon(energy_color)
-        mood_icon(mood_color)
-        
-        health_bar(health_startx, health_starty, health_width, health_height, health_color)
-        energy_bar(energy_startx, energy_starty, energy_width, energy_height, energy_color)
-        mood_bar(mood_startx, mood_starty, mood_width, mood_height, mood_color)  
-                      
         if player == "alive":
-            if health_width < 25 or energy_width < 25 or mood_width < 25:
+
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    pygame.quit()
+                    quit()
+                if event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_LEFT:
+                        health_color = health_color_bright
+                        color_change_count = 20
+                        health_width = health_width + 20  
+                        icon_used = "food" 
+                        icon_time_down = 50
+                    if event.key == pygame.K_DOWN:
+                        energy_color = energy_color_bright
+                        color_change_count = 20
+                        energy_width += 20
+                        icon_used = "drug" 
+                        icon_time_down = 50
+                    if event.key == pygame.K_RIGHT:
+                        mood_color = mood_color_bright
+                        color_change_count = 20
+                        mood_width += 20  
+                        icon_used = "netflix" 
+                        icon_time_down = 50                    
+                if event.type == pygame.KEYUP:
+                    if event.key == pygame.K_LEFT or event.key == pygame.K_RIGHT or event.key == pygame.K_UP or event.key == pygame.K_DOWN:
+                        pass
+    
+            
+            if color_change_count > 0:
+                color_change_count -= 1
+            else:
+                health_color, energy_color, mood_color = health_color_reg, energy_color_reg, mood_color_reg
+            
+            if icon_time_down > 0:
+                icon_time_down -= 1
+            else:
+                icon_used = "None"
+
+            if health_width < 40:
+                health_color = health_color_dark
+            if energy_width < 40:
+                energy_color = energy_color_dark
+            if mood_width < 40:
+                mood_color = mood_color_dark
+                
+            health_icon(health_color)
+            energy_icon(energy_color)
+            mood_icon(mood_color)
+            
+            health_bar(health_startx, health_starty, health_width, health_height, health_color)
+            energy_bar(energy_startx, energy_starty, energy_width, energy_height, energy_color)
+            mood_bar(mood_startx, mood_starty, mood_width, mood_height, mood_color)
+            
+            print(icon_time_down)
+            print(icon_used)
+            
+            if icon_time_down > 0:
+                if icon_used == "food":
+                    if icon_time_down >= 44:
+                        eat_sprite_list.frame = 0
+                        eat_sprite_list.draw(gameDisplay)
+                    else:
+                        if frame_count % 10 == 0:
+                            eat_sprite_list.update()
+                        eat_sprite_list.draw(gameDisplay)
+                elif icon_used == "drug":
+                    if icon_time_down >= 44:
+                        eat_sprite_list.frame = 0
+                        eat_sprite_list.draw(gameDisplay)
+                    else:
+                        if frame_count % 10 == 0:
+                            eat_sprite_list.update()
+                        eat_sprite_list.draw(gameDisplay)
+                if icon_used == "netflix":
+                    if icon_time_down >= 44:
+                        netflix_sprite_list.frame = 0
+                        netflix_sprite_list.draw(gameDisplay)
+                    else:
+                        if frame_count % 10 == 0:
+                            netflix_sprite_list.update()
+                        netflix_sprite_list.draw(gameDisplay) 
+            elif 40 < health_width < bar_width - bar_border*2 + 30 and 40 < energy_width < bar_width - bar_border*2 + 30 and 40 < mood_width < bar_width - bar_border*2 + 30:
+                if frame_count % 10 == 0:
+                    idle_sprite_list.update()
+                idle_sprite_list.draw(gameDisplay)
+            elif health_width < 40 or energy_width < 40 or mood_width < 40:
                 if frame_count % 10 == 0:
                     mad_sprite_list.update()
                 mad_sprite_list.draw(gameDisplay)
@@ -473,10 +643,6 @@ def game_loop():
                 if frame_count % 10 == 0:
                     elated_sprite_list.update()
                 elated_sprite_list.draw(gameDisplay)
-            else: 
-                if frame_count % 10 == 0:
-                    idle_sprite_list.update()
-                idle_sprite_list.draw(gameDisplay)
 
             if 0 < health_width < bar_width - bar_border*2 + 30 and 0 < energy_width < bar_width - bar_border*2 + 30 and 0 < mood_width < bar_width - bar_border*2 + 30:
                 if frame_count % 10 == 0:
@@ -501,7 +667,6 @@ def game_loop():
                 dead_count = starting_death_count
                 death_num += 1
                 life_count = 0
-                
         else:
             if frame_count % 10 == 0:
                 dead_sprite_list.update()
@@ -514,6 +679,7 @@ def game_loop():
                 health_loss = random.randint(1,3)
                 energy_loss = random.randint(1,3)
                 mood_loss = random.randint(1,3)
+                icon_time_down = 0
             else:
                 smallText = pygame.font.Font("freesansbold.ttf",20)
                 textSurf, textRect = text_objects("You died of " + death_cause,smallText)
@@ -521,7 +687,6 @@ def game_loop():
                 gameDisplay.blit(textSurf, textRect) 
                 dead_count -= 1
 
-                
         frame_count += 1
         pygame.display.update()
         clock.tick(60)
