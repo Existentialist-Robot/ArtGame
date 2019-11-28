@@ -54,7 +54,7 @@ health_flash_count = 3
 energy_flash_count = 3
 mood_flash_count = 3
 
-gameDisplay = pygame.display.set_mode((display_width,display_height))
+gameDisplay = pygame.display.set_mode((display_width/4,display_height))
 pygame.display.set_caption('Art Game!')
 clock = pygame.time.Clock()
 
@@ -561,7 +561,7 @@ def game_intro():
                 quit()
                 
         gameDisplay.fill(white)
-        largeText = pygame.font.Font('freesansbold.ttf',115)
+        largeText = pygame.font.Font('freesansbold.ttf',30)
         TextSurf, TextRect = text_objects("Art Game", largeText)
         TextRect.center = ((display_width/2),(display_height/2))
         gameDisplay.blit(TextSurf, TextRect)
