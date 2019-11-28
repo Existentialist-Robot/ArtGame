@@ -163,6 +163,77 @@ class IdleSprite(pygame.sprite.Sprite):
         if self.frame + 1 > len(self.mad_frames):
             self.frame = 0
         self.image = self.mad_frames[self.frame]
+
+class DrugSprite(pygame.sprite.Sprite):
+    image = None
+            
+    def __init__(self, pos):
+        pygame.sprite.Sprite.__init__(self)
+        self.mad_frames = []
+        sprite_sheet = SpriteSheet("DrugMe.png")
+        
+        image = pygame.transform.scale(sprite_sheet.get_image(0, 0, Mad_Size[0]+mad_buff, Mad_Size[1]),(int(Mad_Size[0]/Mad_Resize), int(Mad_Size[1]/Mad_Resize)))
+        image.set_colorkey(black)
+        self.mad_frames.append(image)
+        image = pygame.transform.scale(sprite_sheet.get_image(Mad_Size[0], 0, Mad_Size[0]+mad_buff, Mad_Size[1]),(int(Mad_Size[0]/Mad_Resize), int(Mad_Size[1]/Mad_Resize)))
+        image.set_colorkey(black)
+        self.mad_frames.append(image)
+        image = pygame.transform.scale(sprite_sheet.get_image(Mad_Size[0]*2, 0, Mad_Size[0]+mad_buff, Mad_Size[1]),(int(Mad_Size[0]/Mad_Resize), int(Mad_Size[1]/Mad_Resize)))
+        image.set_colorkey(black)
+        self.mad_frames.append(image)
+        image = pygame.transform.scale(sprite_sheet.get_image(Mad_Size[0]*3, 0, Mad_Size[0]+mad_buff, Mad_Size[1]),(int(Mad_Size[0]/Mad_Resize), int(Mad_Size[1]/Mad_Resize)))
+        image.set_colorkey(black)
+        self.mad_frames.append(image)
+        image = pygame.transform.scale(sprite_sheet.get_image(Mad_Size[0]*4, 0, Mad_Size[0]+mad_buff, Mad_Size[1]),(int(Mad_Size[0]/Mad_Resize), int(Mad_Size[1]/Mad_Resize)))
+        image.set_colorkey(black)
+        self.mad_frames.append(image)
+        image = pygame.transform.scale(sprite_sheet.get_image(0, Mad_Size[1], Mad_Size[0]+mad_buff, Mad_Size[1]),(int(Mad_Size[0]/Mad_Resize), int(Mad_Size[1]/Mad_Resize)))
+        image.set_colorkey(black)
+        self.mad_frames.append(image)
+        image = pygame.transform.scale(sprite_sheet.get_image(Mad_Size[0], Mad_Size[1]+mad_buff, Mad_Size[0]+mad_buff, Mad_Size[1]),(int(Mad_Size[0]/Mad_Resize), int(Mad_Size[1]/Mad_Resize)))
+        image.set_colorkey(black)
+        self.mad_frames.append(image)
+        image = pygame.transform.scale(sprite_sheet.get_image(Mad_Size[0]*2, Mad_Size[1]+mad_buff, Mad_Size[0]+mad_buff, Mad_Size[1]),(int(Mad_Size[0]/Mad_Resize), int(Mad_Size[1]/Mad_Resize)))
+        image.set_colorkey(black)
+        self.mad_frames.append(image)
+        image = pygame.transform.scale(sprite_sheet.get_image(Mad_Size[0]*3, Mad_Size[1]+mad_buff, Mad_Size[0]+mad_buff, Mad_Size[1]),(int(Mad_Size[0]/Mad_Resize), int(Mad_Size[1]/Mad_Resize)))
+        image.set_colorkey(black)
+        self.mad_frames.append(image)
+        image = pygame.transform.scale(sprite_sheet.get_image(Mad_Size[0]*4, Mad_Size[1]+mad_buff, Mad_Size[0]+mad_buff, Mad_Size[1]),(int(Mad_Size[0]/Mad_Resize), int(Mad_Size[1]/Mad_Resize)))
+        image.set_colorkey(black)
+        self.mad_frames.append(image)        
+        image = pygame.transform.scale(sprite_sheet.get_image(0, Mad_Size[1]*2, Mad_Size[0]+mad_buff, Mad_Size[1]),(int(Mad_Size[0]/Mad_Resize), int(Mad_Size[1]/Mad_Resize)))
+        image.set_colorkey(black)
+        self.mad_frames.append(image)
+        image = pygame.transform.scale(sprite_sheet.get_image(Mad_Size[0], Mad_Size[1]*2+mad_buff, Mad_Size[0]+mad_buff, Mad_Size[1]),(int(Mad_Size[0]/Mad_Resize), int(Mad_Size[1]/Mad_Resize)))
+        image.set_colorkey(black)
+        self.mad_frames.append(image)
+        image = pygame.transform.scale(sprite_sheet.get_image(Mad_Size[0]*2, Mad_Size[1]*2+mad_buff, Mad_Size[0]+mad_buff, Mad_Size[1]),(int(Mad_Size[0]/Mad_Resize), int(Mad_Size[1]/Mad_Resize)))
+        image.set_colorkey(black)
+        self.mad_frames.append(image)
+        image = pygame.transform.scale(sprite_sheet.get_image(Mad_Size[0]*3, Mad_Size[1]*2+mad_buff, Mad_Size[0]+mad_buff, Mad_Size[1]),(int(Mad_Size[0]/Mad_Resize), int(Mad_Size[1]/Mad_Resize)))
+        image.set_colorkey(black)
+        self.mad_frames.append(image)
+        image = pygame.transform.scale(sprite_sheet.get_image(Mad_Size[0]*4, Mad_Size[1]*2+mad_buff, Mad_Size[0]+mad_buff, Mad_Size[1]),(int(Mad_Size[0]/Mad_Resize), int(Mad_Size[1]/Mad_Resize)))
+        image.set_colorkey(black)
+        self.mad_frames.append(image)              
+        image = pygame.transform.scale(sprite_sheet.get_image(0, Mad_Size[1]*3+mad_buff, Mad_Size[0]+mad_buff, Mad_Size[1]),(int(Mad_Size[0]/Mad_Resize), int(Mad_Size[1]/Mad_Resize)))
+        image.set_colorkey(black)
+        self.mad_frames.append(image)
+        image = pygame.transform.scale(sprite_sheet.get_image(Mad_Size[0], Mad_Size[1]*3+mad_buff, Mad_Size[0]+mad_buff, Mad_Size[1]),(int(Mad_Size[0]/Mad_Resize), int(Mad_Size[1]/Mad_Resize)))
+        image.set_colorkey(black)
+        self.mad_frames.append(image)         
+
+        self.frame = 0
+        self.image = self.mad_frames[self.frame]
+        self.rect = self.image.get_rect()
+        self.rect.center = pos  
+              
+    def update(self):
+        self.frame += 1
+        if self.frame + 1 > len(self.mad_frames):
+            self.frame = 0
+        self.image = self.mad_frames[self.frame]
         
 class MadSprite(pygame.sprite.Sprite):
     image = None
@@ -562,6 +633,7 @@ def game_loop():
     e = EatSprite([display_width/2,display_height/2])
     n = NetflixSprite([display_width/2,display_height/2])
     d = DeadSprite([display_width/2,display_height/2])
+    drug = DrugSprite([display_width/2,display_height/2])
     hp = HealthIcon([hicfx,hicfy])
     stm = EnergyIcon([eicfx,eicfy])
     chr = MoodIcon([micfx,micfy])
@@ -579,6 +651,8 @@ def game_loop():
     netflix_sprite_list.add(n)
     dead_sprite_list = pygame.sprite.Group()
     dead_sprite_list.add(d) 
+    drug_sprite_list = pygame.sprite.Group()
+    drug_sprite_list.add(drug)
     hp_sprite_list = pygame.sprite.Group()
     hp_sprite_list.add(hp) 
     stm_sprite_list = pygame.sprite.Group()
@@ -670,8 +744,8 @@ def game_loop():
                         eat_sprite_list.draw(gameDisplay)
                 elif icon_used == "drug":
                     if icon_time_down >= 44:
-                        eat_sprite_list.frame = 0
-                        eat_sprite_list.draw(gameDisplay)
+                        drug_sprite_list.frame = 0
+                        drug_sprite_list.draw(gameDisplay)
                     else:
                         if frame_count % 10 == 0:
                             eat_sprite_list.update()
