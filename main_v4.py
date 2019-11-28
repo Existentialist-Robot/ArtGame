@@ -680,19 +680,19 @@ def game_loop():
                     pygame.quit()
                     quit()
                 if event.type == pygame.KEYDOWN:
-                    if event.key == pygame.K_LEFT:
+                    if event.key == pygame.K_a:
                         health_color = health_color_bright
                         color_change_count = 20
                         health_width = health_width + 20  
                         icon_used = "food" 
                         icon_time_down = 50
-                    if event.key == pygame.K_DOWN:
+                    if event.key == pygame.K_w:
                         energy_color = energy_color_bright
                         color_change_count = 20
                         energy_width += 20
                         icon_used = "drug" 
                         icon_time_down = 50
-                    if event.key == pygame.K_RIGHT:
+                    if event.key == pygame.K_d:
                         mood_color = mood_color_bright
                         color_change_count = 20
                         mood_width += 20  
