@@ -7,9 +7,9 @@ from spritesheet_functions import SpriteSheet
  
 pygame.init()
 #%% set params
-
-display_width = 800
-display_height = 600
+#320x240
+display_width = 320
+display_height = 240
  
 black = (0,0,0)
 white = (255,255,255)
