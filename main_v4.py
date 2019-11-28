@@ -566,28 +566,30 @@ def game_intro():
         TextRect.center = ((display_width/2),(display_height/2))
         gameDisplay.blit(TextSurf, TextRect)
 
-        button("GO!",150,450,100,50,green,bright_green,game_loop)
+        button("GO!",display_width/3,display_height*3/4,display_width/10,display_height/10,green,bright_green,game_loop)
 
         mouse = pygame.mouse.get_pos()
-        if 150+100 > mouse[0] > 150 and 450+50 > mouse[1] > 450:
-            pygame.draw.rect(gameDisplay, bright_green,(150,450,100,50))
+        if display_width/3+display_width/10 > mouse[0] > display_width/3 and display_height*3/4+display_height/10 > mouse[1] > display_height*3/4:
+            pygame.draw.rect(gameDisplay, bright_green,(display_width/3,display_height*3/4,display_width/10,display_height/10))
         else:
-            pygame.draw.rect(gameDisplay, green,(150,450,100,50))
+            pygame.draw.rect(gameDisplay, green,(display_width/3,display_height*3/4,display_width/10,display_height/10))
         
         smallText = pygame.font.Font("freesansbold.ttf",20)
+    
         textSurf, textRect = text_objects("GO!", smallText)
-        textRect.center = ( (150+(100/2)), (450+(50/2)) )
+        textRect.center = ( (display_width/3+((display_width/10)/2)), (display_height*3/4+(display_height/10)/2) )
         gameDisplay.blit(textSurf, textRect)
             
-        if 550+100 > mouse[0] > 550 and 450+50 > mouse[1] > 450:
-            pygame.draw.rect(gameDisplay, health_color_bright,(550,450,100,50))
+        if display_width*2/3+display_width/10 > mouse[0] > display_width*2/3 and display_height*3/4+display_height/10 > mouse[1] > display_height*3/4:
+            pygame.draw.rect(gameDisplay, health_color_bright,(display_width*2/3,display_height*3/4,display_width/10,display_height/10))
         else:
-            pygame.draw.rect(gameDisplay, health_color_reg,(550,450,100,50))
+            pygame.draw.rect(gameDisplay, health_color_reg,(display_width*2/3,display_height*3/4,display_width/10,display_height/10))
             
         smallText = pygame.font.Font("freesansbold.ttf",20)
         textSurf, textRect = text_objects("QUIT!", smallText)
-        textRect.center = ( (550+(100/2)), (450+(50/2)) )
+        textRect.center = ( (display_width*2/3+((display_height*3/4)/2)), (display_height*3/4+((display_height/10)/2)) )
         gameDisplay.blit(textSurf, textRect)
+        
         pygame.display.update()
         clock.tick(15)
         
