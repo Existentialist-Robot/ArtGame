@@ -54,7 +54,7 @@ health_flash_count = 3
 energy_flash_count = 3
 mood_flash_count = 3
 
-gameDisplay = pygame.display.set_mode((display_width/4,display_height))
+gameDisplay = pygame.display.set_mode((display_width,display_height))
 pygame.display.set_caption('Art Game!')
 clock = pygame.time.Clock()
 
