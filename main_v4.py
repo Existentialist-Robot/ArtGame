@@ -34,21 +34,24 @@ mood_color_dark = (0,0,125)
 
 frame_color = black
 
-bar_width = 90
-bar_height = 40
+bar_width = 80
+bar_height = 30
 bar_border = 3
 
 radius = 40
 icon_border = 3
 icon_shift = bar_width/2
 
-hicfx,hicfy,hicx,hicy = int(display_width*1/7+icon_shift),int(display_height*5/6),int(display_width*1/7+icon_shift),int(display_height*5/6) # health icon position
-eicfx,eicfy,eicx,eicy = int(display_width*3/7+icon_shift),int(display_height*5/6),int(display_width*3/7+icon_shift),int(display_height*5/6) # energy icon position
-micfx,micfy,micx,micy = int(display_width*5/7+icon_shift),int(display_height*5/6),int(display_width*5/7+icon_shift),int(display_height*5/6) # mood icon position
+hicfx,hicfy,hicx,hicy = int(display_width*1/33+icon_shift),int(display_height*5/6),int(display_width*1/7+icon_shift),int(display_height*5/6) # health icon position
+eicfx,eicfy,eicx,eicy = int(display_width*11/33+icon_shift),int(display_height*5/6),int(display_width*3/7+icon_shift),int(display_height*5/6) # energy icon position
+micfx,micfy,micx,micy = int(display_width*22/33+icon_shift),int(display_height*5/6),int(display_width*5/7+icon_shift),int(display_height*5/6) # mood icon position
 
-hbfx,hbfy,hbfw,hbfh=display_width*1/7,display_height/6,bar_width,bar_height # health bar frame positions
-ebfx,ebfy,ebfw,ebfh=display_width*3/7,display_height/6,bar_width,bar_height # energy bar frame positions
-mbfx,mbfy,mbfw,mbfh=display_width*5/7,display_height/6,bar_width,bar_height # mood bar frame positions
+#    stm = EnergyIcon([eicfx,eicfy])
+#    chr = MoodIcon([micfx,micfy])
+
+hbfx,hbfy,hbfw,hbfh=display_width*1/33,display_height/33,bar_width,bar_height # health bar frame positions
+ebfx,ebfy,ebfw,ebfh=display_width*11/33,display_height/33,bar_width,bar_height # energy bar frame positions
+mbfx,mbfy,mbfw,mbfh=display_width*22/33,display_height/33,bar_width,bar_height # mood bar frame positions
 
 health_flash_count = 3
 energy_flash_count = 3
@@ -74,19 +77,19 @@ clock = pygame.time.Clock()
 #idle_buff = 0
 
 Mad_Size = 1500,1800
-Mad_Resize = 7 # transform size is 1/10th of original
+Mad_Resize = 10 # transform size is 1/10th of original
 mad_buff = 0
 
 Eat_Size = 1500,1800
-Eat_Resize = 7 # transform size is 1/10th of original
+Eat_Resize = 10 # transform size is 1/10th of original
 eat_buff = 0
 
 Netflix_Size = 1500,1800
-Netflix_Resize = 7 # transform size is 1/10th of original
+Netflix_Resize = 10 # transform size is 1/10th of original
 netflix_buff = 0
 
 Dead_Size = 1500,1800
-Dead_Resize = 7 # transform size is 1/10th of original
+Dead_Resize = 9 # transform size is 1/10th of original
 dead_buff = 0
 
 char_width = int(Mad_Size[0]/Mad_Resize) #66
@@ -465,7 +468,7 @@ class HealthIcon(pygame.sprite.Sprite):
         pygame.sprite.Sprite.__init__(self)
         
         sprite_sheet = SpriteSheet("Food.png")
-        self.image = pygame.transform.scale(sprite_sheet.get_image(0, 0, icon_size,icon_size),(int(icon_size/Mad_Resize), int(icon_size/Mad_Resize)))
+        self.image = pygame.transform.scale(sprite_sheet.get_image(0, 0, icon_size,icon_size),(int((icon_size/2)/Mad_Resize), int((icon_size/2)/Mad_Resize)))
         self.image.set_colorkey(black)
         self.rect = self.image.get_rect()
         self.rect.center = pos
@@ -477,7 +480,7 @@ class EnergyIcon(pygame.sprite.Sprite):
         pygame.sprite.Sprite.__init__(self)
         
         sprite_sheet = SpriteSheet("Drugs.png")
-        self.image = pygame.transform.scale(sprite_sheet.get_image(0, 0, icon_size,icon_size),(int(icon_size/Mad_Resize), int(icon_size/Mad_Resize)))
+        self.image = pygame.transform.scale(sprite_sheet.get_image(0, 0, icon_size,icon_size),(int((icon_size/2)/Mad_Resize), int((icon_size/2)/Mad_Resize)))
         self.image.set_colorkey(black)
         self.rect = self.image.get_rect()
         self.rect.center = pos
@@ -489,7 +492,7 @@ class MoodIcon(pygame.sprite.Sprite):
         pygame.sprite.Sprite.__init__(self)
         
         sprite_sheet = SpriteSheet("Netflix.png")
-        self.image = pygame.transform.scale(sprite_sheet.get_image(0, 0, icon_size,icon_size),(int(icon_size/Mad_Resize), int(icon_size/Mad_Resize)))
+        self.image = pygame.transform.scale(sprite_sheet.get_image(0, 0, icon_size,icon_size),(int((icon_size/2)/Mad_Resize), int((icon_size/2)/Mad_Resize)))
         self.image.set_colorkey(black)
         self.rect = self.image.get_rect()
         self.rect.center = pos
@@ -575,7 +578,6 @@ def game_intro():
             pygame.draw.rect(gameDisplay, green,(display_width/3,display_height*3/4,display_width/10,display_height/10))
         
         smallText = pygame.font.Font("freesansbold.ttf",20)
-    
         textSurf, textRect = text_objects("GO!", smallText)
         textRect.center = ( (display_width/3+((display_width/10)/2)), (display_height*3/4+(display_height/10)/2) )
         gameDisplay.blit(textSurf, textRect)
@@ -596,24 +598,27 @@ def game_intro():
 def game_loop():
 
     player = "alive"
+    fresh = 1
     frame_count = 0
+    longest_life = 0
+    new_hs = 0
     
     health_loss =1 #random.randint(1,3)
     energy_loss =1 #random.randint(1,3)
     mood_loss =1 #random.randint(1,3)
     
-    health_startx = display_width*1/7+bar_border
-    health_starty = display_height/6+bar_border
+    health_startx = display_width*1/33 +bar_border
+    health_starty = display_height/33+bar_border
     health_width = bar_width - bar_border*2
     health_height = bar_height - bar_border*2
     
-    energy_startx = display_width*3/7+bar_border
-    energy_starty = display_height/6+bar_border
+    energy_startx = display_width*11/33+bar_border
+    energy_starty = display_height/33+bar_border
     energy_width = bar_width - bar_border*2
     energy_height = bar_height - bar_border*2
     
-    mood_startx = display_width*5/7+bar_border
-    mood_starty = display_height/6+bar_border
+    mood_startx = display_width*22/33+bar_border
+    mood_starty = display_height/33+bar_border
     mood_width = bar_width - bar_border*2
     mood_height = bar_height - bar_border*2
 
@@ -669,11 +674,14 @@ def game_loop():
  
         gameDisplay.fill(white)
         smallText = pygame.font.Font("freesansbold.ttf",20)
-        textSurf, textRect = text_objects("Death Count:" + str(death_num),smallText)
-        textRect.center = (100,50)
+        textSurf, textRect = text_objects(" ",smallText)
+        textRect.center = (100,15)
         gameDisplay.blit(textSurf, textRect)
         
         if player == "alive":
+            if fresh == 1: # start timer
+                fresh = 0
+                alive_start = time.time()
             # need to clear the queue
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
@@ -744,14 +752,14 @@ def game_loop():
                         if frame_count % 10 == 0:
                             eat_sprite_list.update()
                         eat_sprite_list.draw(gameDisplay)
-                elif icon_used == "drug":
+                if icon_used == "drug":
                     if icon_time_down >= 44:
                         drug_sprite_list.frame = 0
                         drug_sprite_list.draw(gameDisplay)
                     else:
                         if frame_count % 10 == 0:
-                            eat_sprite_list.update()
-                        eat_sprite_list.draw(gameDisplay)
+                            drug_sprite_list.update()
+                        drug_sprite_list.draw(gameDisplay)
                 if icon_used == "netflix":
                     if icon_time_down >= 44:
                         netflix_sprite_list.frame = 0
@@ -796,12 +804,18 @@ def game_loop():
                 dead_count = starting_death_count
                 death_num += 1
                 life_count = 0
+                life_time = time.time() - alive_start
+                if longest_life < life_time:
+                    longest_life = life_time
+                    new_hs = 1
         else:
             if frame_count % 10 == 0:
                 dead_sprite_list.update()
             dead_sprite_list.draw(gameDisplay)
             if dead_count <= 0:
                 player = "alive"
+                fresh = 1
+                new_hs = 0
                 health_width = bar_width - bar_border*2
                 energy_width = bar_width - bar_border*2
                 mood_width = bar_width - bar_border*2
@@ -812,12 +826,29 @@ def game_loop():
                 icon_time_down = 0
                 pygame.event.clear()
             else:
-                smallText = pygame.font.Font("freesansbold.ttf",20)
-                textSurf, textRect = text_objects("You died of " + death_cause,smallText)
-                textRect.center = (display_height/2,display_width/2)
+                smallText = pygame.font.Font("freesansbold.ttf",10)
+                textSurf, textRect = text_objects("You died of " + death_cause ,smallText)
+                textRect.center = (display_height/1.5,display_width/8)
                 gameDisplay.blit(textSurf, textRect) 
-                dead_count -= 1
+                
+                smallText = pygame.font.Font("freesansbold.ttf",15)
+                textSurf, textRect = text_objects(" You managed to live for " + str(int(life_time)) + " seconds",smallText)
+                textRect.center = (display_height/1.5,display_width/6)
+                gameDisplay.blit(textSurf, textRect) 
+                
+                smallText = pygame.font.Font("freesansbold.ttf",15)
+                textSurf, textRect = text_objects("Longest Lifetime " + str(int (longest_life)),smallText)
+                textRect.center = (display_height/1.5,display_width/4)
+                gameDisplay.blit(textSurf, textRect)
 
+                if new_hs == 1:
+                    smallText = pygame.font.Font("freesansbold.ttf",15)
+                    textSurf, textRect = text_objects("You WIN Longest Lifetime" + str(longest_life),smallText)
+                    textRect.center = (display_height/1.5 ,display_width/2)
+                    gameDisplay.blit(textSurf, textRect)
+                
+                dead_count -= 1
+                
         frame_count += 1
         pygame.display.update()
         clock.tick(60)
