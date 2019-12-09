@@ -76,52 +76,52 @@
      <None Include="Assets\Resources\Art\Wood texture floor_01\readme.txt" />
      <None Include="Assets\Resources\Art\Simple UI\Fonts\OFL.txt" />
  <Reference Include="Unity.2D.Animation.Runtime">
- <HintPath>C:/Users/Treo/VirtualPetDownload/Library/ScriptAssemblies/Unity.2D.Animation.Runtime.dll</HintPath>
+ <HintPath>C:/Users/Treo/Documents/ArtGame/VirtualPetDownload/Library/ScriptAssemblies/Unity.2D.Animation.Runtime.dll</HintPath>
  </Reference>
  <Reference Include="Unity.TextMeshPro.Editor">
- <HintPath>C:/Users/Treo/VirtualPetDownload/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
+ <HintPath>C:/Users/Treo/Documents/ArtGame/VirtualPetDownload/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
  </Reference>
  <Reference Include="Unity.2D.IK.Editor">
- <HintPath>C:/Users/Treo/VirtualPetDownload/Library/ScriptAssemblies/Unity.2D.IK.Editor.dll</HintPath>
+ <HintPath>C:/Users/Treo/Documents/ArtGame/VirtualPetDownload/Library/ScriptAssemblies/Unity.2D.IK.Editor.dll</HintPath>
  </Reference>
  <Reference Include="Unity.2D.IK.Runtime">
- <HintPath>C:/Users/Treo/VirtualPetDownload/Library/ScriptAssemblies/Unity.2D.IK.Runtime.dll</HintPath>
+ <HintPath>C:/Users/Treo/Documents/ArtGame/VirtualPetDownload/Library/ScriptAssemblies/Unity.2D.IK.Runtime.dll</HintPath>
  </Reference>
  <Reference Include="Unity.PackageManagerUI.Editor">
- <HintPath>C:/Users/Treo/VirtualPetDownload/Library/ScriptAssemblies/Unity.PackageManagerUI.Editor.dll</HintPath>
+ <HintPath>C:/Users/Treo/Documents/ArtGame/VirtualPetDownload/Library/ScriptAssemblies/Unity.PackageManagerUI.Editor.dll</HintPath>
  </Reference>
  <Reference Include="Unity.CollabProxy.Editor">
- <HintPath>C:/Users/Treo/VirtualPetDownload/Library/ScriptAssemblies/Unity.CollabProxy.Editor.dll</HintPath>
+ <HintPath>C:/Users/Treo/Documents/ArtGame/VirtualPetDownload/Library/ScriptAssemblies/Unity.CollabProxy.Editor.dll</HintPath>
  </Reference>
  <Reference Include="Editor">
- <HintPath>C:/Users/Treo/VirtualPetDownload/Library/ScriptAssemblies/Editor.dll</HintPath>
+ <HintPath>C:/Users/Treo/Documents/ArtGame/VirtualPetDownload/Library/ScriptAssemblies/Editor.dll</HintPath>
  </Reference>
  <Reference Include="Unity.InternalAPIEngineBridge.001">
- <HintPath>C:/Users/Treo/VirtualPetDownload/Library/ScriptAssemblies/Unity.InternalAPIEngineBridge.001.dll</HintPath>
+ <HintPath>C:/Users/Treo/Documents/ArtGame/VirtualPetDownload/Library/ScriptAssemblies/Unity.InternalAPIEngineBridge.001.dll</HintPath>
  </Reference>
  <Reference Include="Unity.2D.Common.Runtime">
- <HintPath>C:/Users/Treo/VirtualPetDownload/Library/ScriptAssemblies/Unity.2D.Common.Runtime.dll</HintPath>
+ <HintPath>C:/Users/Treo/Documents/ArtGame/VirtualPetDownload/Library/ScriptAssemblies/Unity.2D.Common.Runtime.dll</HintPath>
  </Reference>
  <Reference Include="Unity.2D.Animation.Editor">
- <HintPath>C:/Users/Treo/VirtualPetDownload/Library/ScriptAssemblies/Unity.2D.Animation.Editor.dll</HintPath>
+ <HintPath>C:/Users/Treo/Documents/ArtGame/VirtualPetDownload/Library/ScriptAssemblies/Unity.2D.Animation.Editor.dll</HintPath>
  </Reference>
  <Reference Include="Unity.2D.Triangle.Runtime">
- <HintPath>C:/Users/Treo/VirtualPetDownload/Library/ScriptAssemblies/Unity.2D.Triangle.Runtime.dll</HintPath>
+ <HintPath>C:/Users/Treo/Documents/ArtGame/VirtualPetDownload/Library/ScriptAssemblies/Unity.2D.Triangle.Runtime.dll</HintPath>
  </Reference>
  <Reference Include="XiaomiSupport">
- <HintPath>C:/Users/Treo/VirtualPetDownload/Library/ScriptAssemblies/XiaomiSupport.dll</HintPath>
+ <HintPath>C:/Users/Treo/Documents/ArtGame/VirtualPetDownload/Library/ScriptAssemblies/XiaomiSupport.dll</HintPath>
  </Reference>
  <Reference Include="Unity.TextMeshPro">
- <HintPath>C:/Users/Treo/VirtualPetDownload/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
+ <HintPath>C:/Users/Treo/Documents/ArtGame/VirtualPetDownload/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
  </Reference>
  <Reference Include="Unity.2D.Common.Editor">
- <HintPath>C:/Users/Treo/VirtualPetDownload/Library/ScriptAssemblies/Unity.2D.Common.Editor.dll</HintPath>
+ <HintPath>C:/Users/Treo/Documents/ArtGame/VirtualPetDownload/Library/ScriptAssemblies/Unity.2D.Common.Editor.dll</HintPath>
  </Reference>
  <Reference Include="Unity.Analytics.DataPrivacy">
- <HintPath>C:/Users/Treo/VirtualPetDownload/Library/ScriptAssemblies/Unity.Analytics.DataPrivacy.dll</HintPath>
+ <HintPath>C:/Users/Treo/Documents/ArtGame/VirtualPetDownload/Library/ScriptAssemblies/Unity.Analytics.DataPrivacy.dll</HintPath>
  </Reference>
  <Reference Include="Unity.InternalAPIEditorBridge.001">
- <HintPath>C:/Users/Treo/VirtualPetDownload/Library/ScriptAssemblies/Unity.InternalAPIEditorBridge.001.dll</HintPath>
+ <HintPath>C:/Users/Treo/Documents/ArtGame/VirtualPetDownload/Library/ScriptAssemblies/Unity.InternalAPIEditorBridge.001.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.AIModule">
  <HintPath>C:/Program Files/Unity/Hub/Editor/2018.4.8f1/Editor/Data/Managed/UnityEngine/UnityEngine.AIModule.dll</HintPath>
@@ -322,19 +322,19 @@
  <HintPath>C:/Program Files/Unity/Hub/Editor/2018.4.8f1/Editor/Data/UnityExtensions/Unity/UnitySpatialTracking/RuntimeEditor/UnityEngine.SpatialTracking.dll</HintPath>
  </Reference>
  <Reference Include="Unity.Analytics.Editor">
- <HintPath>C:/Users/Treo/VirtualPetDownload/Library/PackageCache/com.unity.analytics@3.2.2/Unity.Analytics.Editor.dll</HintPath>
+ <HintPath>C:/Users/Treo/Documents/ArtGame/VirtualPetDownload/Library/PackageCache/com.unity.analytics@3.2.2/Unity.Analytics.Editor.dll</HintPath>
  </Reference>
  <Reference Include="Unity.Analytics.StandardEvents">
- <HintPath>C:/Users/Treo/VirtualPetDownload/Library/PackageCache/com.unity.analytics@3.2.2/Unity.Analytics.StandardEvents.dll</HintPath>
+ <HintPath>C:/Users/Treo/Documents/ArtGame/VirtualPetDownload/Library/PackageCache/com.unity.analytics@3.2.2/Unity.Analytics.StandardEvents.dll</HintPath>
  </Reference>
  <Reference Include="Unity.Analytics.Tracker">
- <HintPath>C:/Users/Treo/VirtualPetDownload/Library/PackageCache/com.unity.analytics@3.2.2/Unity.Analytics.Tracker.dll</HintPath>
+ <HintPath>C:/Users/Treo/Documents/ArtGame/VirtualPetDownload/Library/PackageCache/com.unity.analytics@3.2.2/Unity.Analytics.Tracker.dll</HintPath>
  </Reference>
  <Reference Include="ChannelPurchase">
- <HintPath>C:/Users/Treo/VirtualPetDownload/Library/PackageCache/com.unity.xiaomi@1.0.3/ChannelPurchase.dll</HintPath>
+ <HintPath>C:/Users/Treo/Documents/ArtGame/VirtualPetDownload/Library/PackageCache/com.unity.xiaomi@1.0.3/ChannelPurchase.dll</HintPath>
  </Reference>
  <Reference Include="UnityStore">
- <HintPath>C:/Users/Treo/VirtualPetDownload/Library/PackageCache/com.unity.xiaomi@1.0.3/UnityStore.dll</HintPath>
+ <HintPath>C:/Users/Treo/Documents/ArtGame/VirtualPetDownload/Library/PackageCache/com.unity.xiaomi@1.0.3/UnityStore.dll</HintPath>
  </Reference>
  <Reference Include="netstandard">
  <HintPath>C:/Program Files/Unity/Hub/Editor/2018.4.8f1/Editor/Data/NetStandard/ref/2.0.0/netstandard.dll</HintPath>

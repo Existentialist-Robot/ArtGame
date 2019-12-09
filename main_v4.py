@@ -73,20 +73,20 @@ clock = pygame.time.Clock()
 #Idle_Resize = 10 # transform size is 1/10th of original
 #idle_buff = 0
 
-Mad_Size = 1450,1800
-Mad_Resize = 10 # transform size is 1/10th of original
+Mad_Size = 1500,1800
+Mad_Resize = 7 # transform size is 1/10th of original
 mad_buff = 0
 
 Eat_Size = 1500,1800
-Eat_Resize = 10 # transform size is 1/10th of original
+Eat_Resize = 7 # transform size is 1/10th of original
 eat_buff = 0
 
 Netflix_Size = 1500,1800
-Netflix_Resize = 10 # transform size is 1/10th of original
+Netflix_Resize = 7 # transform size is 1/10th of original
 netflix_buff = 0
 
-Dead_Size = 1450,1800
-Dead_Resize = 10 # transform size is 1/10th of original
+Dead_Size = 1500,1800
+Dead_Resize = 7 # transform size is 1/10th of original
 dead_buff = 0
 
 char_width = int(Mad_Size[0]/Mad_Resize) #66
@@ -486,9 +486,9 @@ def game_loop():
     player = "alive"
     frame_count = 0
     
-    health_loss = random.randint(1,3)
-    energy_loss = random.randint(1,3)
-    mood_loss = random.randint(1,3)
+    health_loss =1 #random.randint(1,3)
+    energy_loss =1 #random.randint(1,3)
+    mood_loss =1 #random.randint(1,3)
     
     health_startx = display_width*1/7+bar_border
     health_starty = display_height/6+bar_border
