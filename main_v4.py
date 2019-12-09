@@ -7,9 +7,9 @@ from spritesheet_functions import SpriteSheet
  
 pygame.init()
 #%% set params
-
-display_width = 800
-display_height = 600
+#320x240
+display_width = 256
+display_height = 196
  
 black = (0,0,0)
 white = (255,255,255)
@@ -92,6 +92,8 @@ dead_buff = 0
 char_width = int(Mad_Size[0]/Mad_Resize) #66
 char_height = int(Mad_Size[1]/Mad_Resize) #90
 
+icon_size = 1200
+
 #%% Icon sprites
 
 #class Health_Sprite(pygame.sprite.Sprite):
@@ -150,6 +152,77 @@ class IdleSprite(pygame.sprite.Sprite):
         image = pygame.transform.scale(sprite_sheet.get_image(Mad_Size[0], Mad_Size[1]*2, Mad_Size[0]+mad_buff, Mad_Size[1]),(int(Mad_Size[0]/Mad_Resize), int(Mad_Size[1]/Mad_Resize)))
         image.set_colorkey(black)
         self.mad_frames.append(image)
+
+        self.frame = 0
+        self.image = self.mad_frames[self.frame]
+        self.rect = self.image.get_rect()
+        self.rect.center = pos  
+              
+    def update(self):
+        self.frame += 1
+        if self.frame + 1 > len(self.mad_frames):
+            self.frame = 0
+        self.image = self.mad_frames[self.frame]
+
+class DrugSprite(pygame.sprite.Sprite):
+    image = None
+            
+    def __init__(self, pos):
+        pygame.sprite.Sprite.__init__(self)
+        self.mad_frames = []
+        sprite_sheet = SpriteSheet("DrugMe.png")
+        
+        image = pygame.transform.scale(sprite_sheet.get_image(0, 0, Mad_Size[0]+mad_buff, Mad_Size[1]),(int(Mad_Size[0]/Mad_Resize), int(Mad_Size[1]/Mad_Resize)))
+        image.set_colorkey(black)
+        self.mad_frames.append(image)
+        image = pygame.transform.scale(sprite_sheet.get_image(Mad_Size[0], 0, Mad_Size[0]+mad_buff, Mad_Size[1]),(int(Mad_Size[0]/Mad_Resize), int(Mad_Size[1]/Mad_Resize)))
+        image.set_colorkey(black)
+        self.mad_frames.append(image)
+        image = pygame.transform.scale(sprite_sheet.get_image(Mad_Size[0]*2, 0, Mad_Size[0]+mad_buff, Mad_Size[1]),(int(Mad_Size[0]/Mad_Resize), int(Mad_Size[1]/Mad_Resize)))
+        image.set_colorkey(black)
+        self.mad_frames.append(image)
+        image = pygame.transform.scale(sprite_sheet.get_image(Mad_Size[0]*3, 0, Mad_Size[0]+mad_buff, Mad_Size[1]),(int(Mad_Size[0]/Mad_Resize), int(Mad_Size[1]/Mad_Resize)))
+        image.set_colorkey(black)
+        self.mad_frames.append(image)
+        image = pygame.transform.scale(sprite_sheet.get_image(Mad_Size[0]*4, 0, Mad_Size[0]+mad_buff, Mad_Size[1]),(int(Mad_Size[0]/Mad_Resize), int(Mad_Size[1]/Mad_Resize)))
+        image.set_colorkey(black)
+        self.mad_frames.append(image)
+        image = pygame.transform.scale(sprite_sheet.get_image(0, Mad_Size[1], Mad_Size[0]+mad_buff, Mad_Size[1]),(int(Mad_Size[0]/Mad_Resize), int(Mad_Size[1]/Mad_Resize)))
+        image.set_colorkey(black)
+        self.mad_frames.append(image)
+        image = pygame.transform.scale(sprite_sheet.get_image(Mad_Size[0], Mad_Size[1]+mad_buff, Mad_Size[0]+mad_buff, Mad_Size[1]),(int(Mad_Size[0]/Mad_Resize), int(Mad_Size[1]/Mad_Resize)))
+        image.set_colorkey(black)
+        self.mad_frames.append(image)
+        image = pygame.transform.scale(sprite_sheet.get_image(Mad_Size[0]*2, Mad_Size[1]+mad_buff, Mad_Size[0]+mad_buff, Mad_Size[1]),(int(Mad_Size[0]/Mad_Resize), int(Mad_Size[1]/Mad_Resize)))
+        image.set_colorkey(black)
+        self.mad_frames.append(image)
+        image = pygame.transform.scale(sprite_sheet.get_image(Mad_Size[0]*3, Mad_Size[1]+mad_buff, Mad_Size[0]+mad_buff, Mad_Size[1]),(int(Mad_Size[0]/Mad_Resize), int(Mad_Size[1]/Mad_Resize)))
+        image.set_colorkey(black)
+        self.mad_frames.append(image)
+        image = pygame.transform.scale(sprite_sheet.get_image(Mad_Size[0]*4, Mad_Size[1]+mad_buff, Mad_Size[0]+mad_buff, Mad_Size[1]),(int(Mad_Size[0]/Mad_Resize), int(Mad_Size[1]/Mad_Resize)))
+        image.set_colorkey(black)
+        self.mad_frames.append(image)        
+        image = pygame.transform.scale(sprite_sheet.get_image(0, Mad_Size[1]*2, Mad_Size[0]+mad_buff, Mad_Size[1]),(int(Mad_Size[0]/Mad_Resize), int(Mad_Size[1]/Mad_Resize)))
+        image.set_colorkey(black)
+        self.mad_frames.append(image)
+        image = pygame.transform.scale(sprite_sheet.get_image(Mad_Size[0], Mad_Size[1]*2+mad_buff, Mad_Size[0]+mad_buff, Mad_Size[1]),(int(Mad_Size[0]/Mad_Resize), int(Mad_Size[1]/Mad_Resize)))
+        image.set_colorkey(black)
+        self.mad_frames.append(image)
+        image = pygame.transform.scale(sprite_sheet.get_image(Mad_Size[0]*2, Mad_Size[1]*2+mad_buff, Mad_Size[0]+mad_buff, Mad_Size[1]),(int(Mad_Size[0]/Mad_Resize), int(Mad_Size[1]/Mad_Resize)))
+        image.set_colorkey(black)
+        self.mad_frames.append(image)
+        image = pygame.transform.scale(sprite_sheet.get_image(Mad_Size[0]*3, Mad_Size[1]*2+mad_buff, Mad_Size[0]+mad_buff, Mad_Size[1]),(int(Mad_Size[0]/Mad_Resize), int(Mad_Size[1]/Mad_Resize)))
+        image.set_colorkey(black)
+        self.mad_frames.append(image)
+        image = pygame.transform.scale(sprite_sheet.get_image(Mad_Size[0]*4, Mad_Size[1]*2+mad_buff, Mad_Size[0]+mad_buff, Mad_Size[1]),(int(Mad_Size[0]/Mad_Resize), int(Mad_Size[1]/Mad_Resize)))
+        image.set_colorkey(black)
+        self.mad_frames.append(image)              
+        image = pygame.transform.scale(sprite_sheet.get_image(0, Mad_Size[1]*3+mad_buff, Mad_Size[0]+mad_buff, Mad_Size[1]),(int(Mad_Size[0]/Mad_Resize), int(Mad_Size[1]/Mad_Resize)))
+        image.set_colorkey(black)
+        self.mad_frames.append(image)
+        image = pygame.transform.scale(sprite_sheet.get_image(Mad_Size[0], Mad_Size[1]*3+mad_buff, Mad_Size[0]+mad_buff, Mad_Size[1]),(int(Mad_Size[0]/Mad_Resize), int(Mad_Size[1]/Mad_Resize)))
+        image.set_colorkey(black)
+        self.mad_frames.append(image)         
 
         self.frame = 0
         self.image = self.mad_frames[self.frame]
@@ -373,17 +446,54 @@ def mood_bar(b3x,b3y,b3w,b3h, color):
 
 
 #%% Icons
-def health_icon(health_color): # circle(surface, color, center, radius, width=0)
-    pygame.draw.circle(gameDisplay,frame_color,[hicfx,hicfy],radius,0)
-    pygame.draw.circle(gameDisplay,health_color,[hicx,hicy],radius-icon_border*4,0)
+#def health_icon(health_color): # circle(surface, color, center, radius, width=0)
+#    pygame.draw.circle(gameDisplay,frame_color,[hicfx,hicfy],radius,0)
+#    pygame.draw.circle(gameDisplay,health_color,[hicx,hicy],radius-icon_border*4,0)
+#
+#def energy_icon(energy_color): # circle(surface, color, center, radius, width=0)
+#    pygame.draw.circle(gameDisplay,frame_color,[eicfx,eicfy],radius,0)
+#    pygame.draw.circle(gameDisplay,energy_color,[eicx,eicy],radius-icon_border*4,0)
+#
+#def mood_icon(mood_color): # circle(surface, color, center, radius, width=0)
+#    pygame.draw.circle(gameDisplay,frame_color,[micfx,micfy],radius,0)
+#    pygame.draw.circle(gameDisplay,mood_color,[micx,micy],radius-icon_border*4,0)
 
-def energy_icon(energy_color): # circle(surface, color, center, radius, width=0)
-    pygame.draw.circle(gameDisplay,frame_color,[eicfx,eicfy],radius,0)
-    pygame.draw.circle(gameDisplay,energy_color,[eicx,eicy],radius-icon_border*4,0)
-
-def mood_icon(mood_color): # circle(surface, color, center, radius, width=0)
-    pygame.draw.circle(gameDisplay,frame_color,[micfx,micfy],radius,0)
-    pygame.draw.circle(gameDisplay,mood_color,[micx,micy],radius-icon_border*4,0)
+class HealthIcon(pygame.sprite.Sprite):
+    image = None
+            
+    def __init__(self, pos):
+        pygame.sprite.Sprite.__init__(self)
+        
+        sprite_sheet = SpriteSheet("Food.png")
+        self.image = pygame.transform.scale(sprite_sheet.get_image(0, 0, icon_size,icon_size),(int(icon_size/Mad_Resize), int(icon_size/Mad_Resize)))
+        self.image.set_colorkey(black)
+        self.rect = self.image.get_rect()
+        self.rect.center = pos
+        
+class EnergyIcon(pygame.sprite.Sprite):
+    image = None
+            
+    def __init__(self, pos):
+        pygame.sprite.Sprite.__init__(self)
+        
+        sprite_sheet = SpriteSheet("Drugs.png")
+        self.image = pygame.transform.scale(sprite_sheet.get_image(0, 0, icon_size,icon_size),(int(icon_size/Mad_Resize), int(icon_size/Mad_Resize)))
+        self.image.set_colorkey(black)
+        self.rect = self.image.get_rect()
+        self.rect.center = pos
+        
+class MoodIcon(pygame.sprite.Sprite):
+    image = None
+            
+    def __init__(self, pos):
+        pygame.sprite.Sprite.__init__(self)
+        
+        sprite_sheet = SpriteSheet("Netflix.png")
+        self.image = pygame.transform.scale(sprite_sheet.get_image(0, 0, icon_size,icon_size),(int(icon_size/Mad_Resize), int(icon_size/Mad_Resize)))
+        self.image.set_colorkey(black)
+        self.rect = self.image.get_rect()
+        self.rect.center = pos
+      
 
 #%%
 #def health_button(health_width): 
@@ -451,33 +561,35 @@ def game_intro():
                 quit()
                 
         gameDisplay.fill(white)
-        largeText = pygame.font.Font('freesansbold.ttf',115)
+        largeText = pygame.font.Font('freesansbold.ttf',30)
         TextSurf, TextRect = text_objects("Art Game", largeText)
         TextRect.center = ((display_width/2),(display_height/2))
         gameDisplay.blit(TextSurf, TextRect)
 
-        button("GO!",150,450,100,50,green,bright_green,game_loop)
+        button("GO!",display_width/3,display_height*3/4,display_width/10,display_height/10,green,bright_green,game_loop)
 
         mouse = pygame.mouse.get_pos()
-        if 150+100 > mouse[0] > 150 and 450+50 > mouse[1] > 450:
-            pygame.draw.rect(gameDisplay, bright_green,(150,450,100,50))
+        if display_width/3+display_width/10 > mouse[0] > display_width/3 and display_height*3/4+display_height/10 > mouse[1] > display_height*3/4:
+            pygame.draw.rect(gameDisplay, bright_green,(display_width/3,display_height*3/4,display_width/10,display_height/10))
         else:
-            pygame.draw.rect(gameDisplay, green,(150,450,100,50))
+            pygame.draw.rect(gameDisplay, green,(display_width/3,display_height*3/4,display_width/10,display_height/10))
         
         smallText = pygame.font.Font("freesansbold.ttf",20)
+    
         textSurf, textRect = text_objects("GO!", smallText)
-        textRect.center = ( (150+(100/2)), (450+(50/2)) )
+        textRect.center = ( (display_width/3+((display_width/10)/2)), (display_height*3/4+(display_height/10)/2) )
         gameDisplay.blit(textSurf, textRect)
             
-        if 550+100 > mouse[0] > 550 and 450+50 > mouse[1] > 450:
-            pygame.draw.rect(gameDisplay, health_color_bright,(550,450,100,50))
+        if display_width*2/3+display_width/10 > mouse[0] > display_width*2/3 and display_height*3/4+display_height/10 > mouse[1] > display_height*3/4:
+            pygame.draw.rect(gameDisplay, health_color_bright,(display_width*2/3,display_height*3/4,display_width/10,display_height/10))
         else:
-            pygame.draw.rect(gameDisplay, health_color_reg,(550,450,100,50))
+            pygame.draw.rect(gameDisplay, health_color_reg,(display_width*2/3,display_height*3/4,display_width/10,display_height/10))
             
         smallText = pygame.font.Font("freesansbold.ttf",20)
         textSurf, textRect = text_objects("QUIT!", smallText)
-        textRect.center = ( (550+(100/2)), (450+(50/2)) )
+        textRect.center = ( (display_width*2/3+((display_height*3/4)/2)), (display_height*3/4+((display_height/10)/2)) )
         gameDisplay.blit(textSurf, textRect)
+        
         pygame.display.update()
         clock.tick(15)
         
@@ -523,6 +635,11 @@ def game_loop():
     e = EatSprite([display_width/2,display_height/2])
     n = NetflixSprite([display_width/2,display_height/2])
     d = DeadSprite([display_width/2,display_height/2])
+    drug = DrugSprite([display_width/2,display_height/2])
+    hp = HealthIcon([hicfx,hicfy])
+    stm = EnergyIcon([eicfx,eicfy])
+    chr = MoodIcon([micfx,micfy])
+    
     
     idle_sprite_list = pygame.sprite.Group()
     idle_sprite_list.add(i)
@@ -535,8 +652,16 @@ def game_loop():
     netflix_sprite_list = pygame.sprite.Group()
     netflix_sprite_list.add(n)
     dead_sprite_list = pygame.sprite.Group()
-    dead_sprite_list.add(d)    
-
+    dead_sprite_list.add(d) 
+    drug_sprite_list = pygame.sprite.Group()
+    drug_sprite_list.add(drug)
+    hp_sprite_list = pygame.sprite.Group()
+    hp_sprite_list.add(hp) 
+    stm_sprite_list = pygame.sprite.Group()
+    stm_sprite_list.add(stm) 
+    chr_sprite_list = pygame.sprite.Group()
+    chr_sprite_list.add(chr) 
+    
     icon_used = "None"
     icon_time_down = 0
 
@@ -549,25 +674,25 @@ def game_loop():
         gameDisplay.blit(textSurf, textRect)
         
         if player == "alive":
-
+            # need to clear the queue
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     pygame.quit()
                     quit()
                 if event.type == pygame.KEYDOWN:
-                    if event.key == pygame.K_LEFT:
+                    if event.key == pygame.K_a:
                         health_color = health_color_bright
                         color_change_count = 20
                         health_width = health_width + 20  
                         icon_used = "food" 
                         icon_time_down = 50
-                    if event.key == pygame.K_DOWN:
+                    if event.key == pygame.K_w:
                         energy_color = energy_color_bright
                         color_change_count = 20
                         energy_width += 20
                         icon_used = "drug" 
                         icon_time_down = 50
-                    if event.key == pygame.K_RIGHT:
+                    if event.key == pygame.K_d:
                         mood_color = mood_color_bright
                         color_change_count = 20
                         mood_width += 20  
@@ -595,9 +720,13 @@ def game_loop():
             if mood_width < 40:
                 mood_color = mood_color_dark
                 
-            health_icon(health_color)
-            energy_icon(energy_color)
-            mood_icon(mood_color)
+#            health_icon(health_color)
+#            energy_icon(energy_color)
+#            mood_icon(mood_color)
+                
+            hp_sprite_list.draw(gameDisplay)
+            stm_sprite_list.draw(gameDisplay)
+            chr_sprite_list.draw(gameDisplay)
             
             health_bar(health_startx, health_starty, health_width, health_height, health_color)
             energy_bar(energy_startx, energy_starty, energy_width, energy_height, energy_color)
@@ -617,8 +746,8 @@ def game_loop():
                         eat_sprite_list.draw(gameDisplay)
                 elif icon_used == "drug":
                     if icon_time_down >= 44:
-                        eat_sprite_list.frame = 0
-                        eat_sprite_list.draw(gameDisplay)
+                        drug_sprite_list.frame = 0
+                        drug_sprite_list.draw(gameDisplay)
                     else:
                         if frame_count % 10 == 0:
                             eat_sprite_list.update()
@@ -679,7 +808,9 @@ def game_loop():
                 health_loss = random.randint(1,3)
                 energy_loss = random.randint(1,3)
                 mood_loss = random.randint(1,3)
+                color_change_count = 0
                 icon_time_down = 0
+                pygame.event.clear()
             else:
                 smallText = pygame.font.Font("freesansbold.ttf",20)
                 textSurf, textRect = text_objects("You died of " + death_cause,smallText)

@@ -61,17 +61,17 @@ pygame.display.set_caption('Art Game!')
 clock = pygame.time.Clock()
 starting_death_count = 100
 
-sprite_sheet = SpriteSheet("p1_walk.png")
-
-sprite_sheet1 = SpriteSheet("IdleMe.png")
-neutral = sprite_sheet.get_image(0, 0, 66, 90)
-low_health = sprite_sheet.get_image(0, 0, 66, 90)
-low_energy = sprite_sheet.get_image(66, 0, 66, 90)
-low_mood = sprite_sheet.get_image(132, 0, 67, 90)
-high_health = sprite_sheet.get_image(0, 93, 66, 90)
-high_energy = sprite_sheet.get_image(66, 93, 66, 90)
-high_mood = sprite_sheet.get_image(132, 93, 72, 90)
-dead = sprite_sheet.get_image(0, 186, 70, 90)
+#sprite_sheet = SpriteSheet("p1_walk.png")
+#
+#sprite_sheet1 = SpriteSheet("IdleMe.png")
+#neutral = sprite_sheet.get_image(0, 0, 66, 90)
+#low_health = sprite_sheet.get_image(0, 0, 66, 90)
+#low_energy = sprite_sheet.get_image(66, 0, 66, 90)
+#low_mood = sprite_sheet.get_image(132, 0, 67, 90)
+#high_health = sprite_sheet.get_image(0, 93, 66, 90)
+#high_energy = sprite_sheet.get_image(66, 93, 66, 90)
+#high_mood = sprite_sheet.get_image(132, 93, 72, 90)
+#dead = sprite_sheet.get_image(0, 186, 70, 90)
 
 char_width = 66
 char_height = 90
@@ -79,6 +79,8 @@ char_height = 90
 Mad_Size = 1450,1800
 Mad_Resize = 10
 mad_buff = 0
+
+icon_size = 1200
 
 #import spritesheet
 #
@@ -91,26 +93,26 @@ mad_buff = 0
 
 #%% sprites
 
-class Health_Sprite(pygame.sprite.Sprite):
-    def __init__(self):
-        super(Health_Sprite, self).__init__()
-        self.image = high_health
-        self.image.set_colorkey((255, 255, 255))
-        self.rect = self.image.get_rect()
-
-class Energy_Sprite(pygame.sprite.Sprite):
-    def __init__(self):
-        super(Energy_Sprite, self).__init__()
-        self.image = high_energy
-        self.image.set_colorkey((255, 255, 255))
-        self.rect = self.image.get_rect()
-
-class Mood_Sprite(pygame.sprite.Sprite):
-    def __init__(self):
-        super(Mood_Sprite, self).__init__()
-        self.image = high_mood
-        self.image.set_colorkey((255, 255, 255))
-        self.rect = self.image.get_rect()
+#class Health_Sprite(pygame.sprite.Sprite):
+#    def __init__(self):
+#        super(Health_Sprite, self).__init__()
+#        self.image = high_health
+#        self.image.set_colorkey((255, 255, 255))
+#        self.rect = self.image.get_rect()
+#
+#class Energy_Sprite(pygame.sprite.Sprite):
+#    def __init__(self):
+#        super(Energy_Sprite, self).__init__()
+#        self.image = high_energy
+#        self.image.set_colorkey((255, 255, 255))
+#        self.rect = self.image.get_rect()
+#
+#class Mood_Sprite(pygame.sprite.Sprite):
+#    def __init__(self):
+#        super(Mood_Sprite, self).__init__()
+#        self.image = high_mood
+#        self.image.set_colorkey((255, 255, 255))
+#        self.rect = self.image.get_rect()
 
 
 #%% Player
@@ -249,18 +251,53 @@ def mood_bar(b3x,b3y,b3w,b3h, color):
 
 
 #%% Icons
-def health_icon(health_color): # circle(surface, color, center, radius, width=0)
-    pygame.draw.circle(gameDisplay,frame_color,[hicfx,hicfy],radius,0)
-    pygame.draw.circle(gameDisplay,health_color,[hicx,hicy],radius-icon_border*4,0)
-
-def energy_icon(energy_color): # circle(surface, color, center, radius, width=0)
-    pygame.draw.circle(gameDisplay,frame_color,[eicfx,eicfy],radius,0)
-    pygame.draw.circle(gameDisplay,energy_color,[eicx,eicy],radius-icon_border*4,0)
-
-def mood_icon(mood_color): # circle(surface, color, center, radius, width=0)
-    pygame.draw.circle(gameDisplay,frame_color,[micfx,micfy],radius,0)
-    pygame.draw.circle(gameDisplay,mood_color,[micx,micy],radius-icon_border*4,0)
-
+#def health_icon(health_color): # circle(surface, color, center, radius, width=0)
+#    pygame.draw.circle(gameDisplay,frame_color,[hicfx,hicfy],radius,0)
+#    pygame.draw.circle(gameDisplay,health_color,[hicx,hicy],radius-icon_border*4,0)
+#
+#def energy_icon(energy_color): # circle(surface, color, center, radius, width=0)
+#    pygame.draw.circle(gameDisplay,frame_color,[eicfx,eicfy],radius,0)
+#    pygame.draw.circle(gameDisplay,energy_color,[eicx,eicy],radius-icon_border*4,0)
+#
+#def mood_icon(mood_color): # circle(surface, color, center, radius, width=0)
+#    pygame.draw.circle(gameDisplay,frame_color,[micfx,micfy],radius,0)
+#    pygame.draw.circle(gameDisplay,mood_color,[micx,micy],radius-icon_border*4,0)
+class FoodIcon(pygame.sprite.Sprite):
+    image = None
+            
+    def __init__(self, pos):
+        pygame.sprite.Sprite.__init__(self)
+        
+        sprite_sheet = SpriteSheet("Food.png")
+        self.image = pygame.transform.scale(sprite_sheet.get_image((0, 0, icon_size,icon_size),(icon_size/Mad_Resize), int(icon_size/Mad_Resize)))
+        self.image.set_colorkey(black)
+        self.rect = self.image.get_rect()
+        self.rect.center = pos
+        
+class EnergyIcon(pygame.sprite.Sprite):
+    image = None
+            
+    def __init__(self, pos):
+        pygame.sprite.Sprite.__init__(self)
+        
+        sprite_sheet = SpriteSheet("Drugs.png")
+        self.image = pygame.transform.scale((sprite_sheet.get_image(0, 0, icon_size,icon_size),(icon_size/Mad_Resize), int(icon_size/Mad_Resize)))
+        self.image.set_colorkey(black)
+        self.rect = self.image.get_rect()
+        self.rect.center = pos
+        
+class HealthIcon(pygame.sprite.Sprite):
+    image = None
+            
+    def __init__(self, pos):
+        pygame.sprite.Sprite.__init__(self)
+        
+        sprite_sheet = SpriteSheet("Netflix.png")
+        self.image = pygame.transform.scale((sprite_sheet.get_image(0, 0, icon_size,icon_size),(icon_size/Mad_Resize), int(icon_size/Mad_Resize)))
+        self.image.set_colorkey(black)
+        self.rect = self.image.get_rect()
+        self.rect.center = pos
+        
 #%%
 #def health_button(health_width): 
 #    health_color = health_color_bright
@@ -401,7 +438,7 @@ def game_loop():
     m = MadSprite([300, 500])
     i = IdleSprite([100, 300])
     p = PlayerSprite([display_width/2-char_width/2,display_height/2-char_height/2])
-#    d = DeadSprite([400, 100])
+    d = DeadSprite([400, 100])
     w = MadSprite([100, 200])
     active_sprite_list = pygame.sprite.Group()
     active_sprite_list.add(m)
@@ -409,6 +446,11 @@ def game_loop():
 #    health_sprite = Health_Sprite()
 #    energy_sprite = Energy_Sprite()
 #    mood_sprite = Mood_Sprite()
+    h = HealthIcon([hicfx,hicfy])
+    e = HealthIcon([eicfx,eicfy])
+    md = HealthIcon([micfx,micfy])
+
+
 
     while not gameExit:
  
@@ -458,9 +500,9 @@ def game_loop():
                 mood_color = mood_color_dark
                 
             
-            health_icon(health_color)
-            energy_icon(energy_color)
-            mood_icon(mood_color)
+#            health_icon(health_color)
+#            energy_icon(energy_color)
+#            mood_icon(mood_color)
             
             health_bar(health_startx, health_starty, health_width, health_height, health_color)
             energy_bar(energy_startx, energy_starty, energy_width, energy_height, energy_color)
